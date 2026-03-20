@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0d0500">
+<title>ግእዝ ቋንቋ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8902a;--gold-l:#f0c040;--gold-p:#f7e8c0;
+  --dark:#0d0500;--dark2:#1a0a00;--dark3:#2d1500;
+  --brown:#7a3d00;--parch:#f5e8cc;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;background:var(--dark);}
+body{
+  font-family:'Noto Serif Ethiopic',serif;color:var(--parch);
+  display:flex;flex-direction:column;
+  max-width:430px;margin:0 auto;height:100dvh;overflow:hidden;
+}
+.particles{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.p{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:pfloat linear infinite;}
+@keyframes pfloat{0%{transform:translateY(100vh);opacity:0;}10%{opacity:0.5;}90%{opacity:0.15;}100%{transform:translateY(-30px);opacity:0;}}
+
+/* Splash */
+#splash{position:fixed;inset:0;z-index:200;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s;}
+.sp-cross{width:110px;height:110px;margin-bottom:2rem;animation:sc-pulse 1.5s ease-in-out infinite;}
+@keyframes sc-pulse{0%,100%{filter:drop-shadow(0 0 10px rgba(200,144,42,0.5));}50%{filter:drop-shadow(0 0 30px rgba(240,192,64,0.9));transform:scale(1.06);}}
+.sp-t{font-family:'Cinzel',serif;font-size:30px;font-weight:700;color:var(--gold-l);letter-spacing:0.06em;animation:fup 1s ease 0.3s both;}
+.sp-s{font-size:12px;color:var(--gold);opacity:0.65;font-family:'Cinzel',serif;letter-spacing:0.18em;margin-top:5px;animation:fup 1s ease 0.6s both;}
+.sp-bar{width:200px;height:2px;background:rgba(200,144,42,0.2);border-radius:2px;margin-top:2rem;animation:fup 0.5s ease 0.9s both;overflow:hidden;}
+.sp-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-l));animation:spload 2.2s ease 1s forwards;}
+@keyframes spload{to{width:100%;}}
+@keyframes fup{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+/* Header */
+.hdr{background:var(--dark2);border-bottom:1px solid rgba(200,144,42,0.25);padding:0.85rem 1.1rem 0.75rem;position:relative;z-index:10;flex-shrink:0;}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.hdr-title h1{font-size:20px;font-weight:700;color:var(--gold-l);}
+.hdr-title p{font-size:10px;color:var(--gold);opacity:0.6;font-family:'Cinzel',serif;letter-spacing:0.1em;margin-top:1px;}
+.hdr-right{display:flex;align-items:center;gap:10px;}
+.prog-ring{position:relative;width:44px;height:44px;}
+.prog-ring svg{transform:rotate(-90deg);}
+.prog-ring circle{fill:none;stroke-width:3.5;}
+.pr-bg{stroke:rgba(200,144,42,0.12);}
+.pr-fg{stroke:var(--gold-l);stroke-linecap:round;transition:stroke-dashoffset 0.6s ease;}
+.pr-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--gold-l);}
+.hdr-cross{width:40px;height:40px;border-radius:50%;background:rgba(200,144,42,0.1);border:1px solid rgba(200,144,42,0.3);display:flex;align-items:center;justify-content:center;}
+.stats{display:flex;gap:6px;}
+.st{flex:1;background:rgba(200,144,42,0.07);border:1px solid rgba(200,144,42,0.18);border-radius:8px;padding:6px 8px;text-align:center;}
+.st-n{font-size:19px;font-weight:700;color:var(--gold-l);}
+.st-l{font-size:9px;color:var(--gold);opacity:0.65;margin-top:1px;}
+
+/* Nav */
+.nav{display:flex;background:var(--dark);border-bottom:1px solid rgba(200,144,42,0.12);flex-shrink:0;z-index:10;position:relative;}
+.nb{flex:1;padding:10px 4px 8px;background:transparent;border:none;color:rgba(200,144,42,0.3);font-family:'Noto Serif Ethiopic',serif;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;margin-bottom:-1px;}
+.nb.active{color:var(--gold-l);border-bottom-color:var(--gold-l);}
+.nb span{display:block;font-size:9px;font-family:'Cinzel',serif;letter-spacing:0.05em;margin-top:1px;color:inherit;opacity:0.6;}
+
+/* Content */
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;position:relative;z-index:5;scrollbar-width:none;}
+.content::-webkit-scrollbar{display:none;}
+.sec{display:none;}.sec.active{display:block;}
+.sec-ttl{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-family:'Cinzel',serif;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.sec-ttl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(200,144,42,0.3),transparent);}
+.ornament{text-align:center;color:var(--gold);opacity:0.25;letter-spacing:8px;font-size:14px;margin:8px 0 14px;}
+
+/* Word cards */
+.wcard{
+  background:linear-gradient(135deg,rgba(45,21,0,0.92),rgba(13,5,0,0.96));
+  border:1px solid rgba(200,144,42,0.28);border-radius:16px;
+  padding:1.1rem 1.15rem;margin-bottom:10px;
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:transform 0.18s,border-color 0.2s;
+  animation:cin 0.4s ease both;
+}
+@keyframes cin{from{opacity:0;transform:translateX(-18px);}to{opacity:1;transform:none;}}
+.wcard::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--ac,var(--gold));border-radius:16px 0 0 16px;}
+.wcard:active{transform:scale(0.97);}
+.wt{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.wgeez{font-size:27px;font-weight:700;color:var(--gold-l);line-height:1.2;}
+.wlatin{font-size:11px;color:rgba(200,144,42,0.5);font-family:'Cinzel',serif;letter-spacing:0.04em;margin:4px 0;}
+.wmeaning{font-size:14px;color:var(--parch);background:rgba(0,0,0,0.22);border-radius:8px;padding:6px 10px;margin-top:5px;}
+.wright{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.wbadge{font-size:10px;padding:3px 8px;border-radius:20px;font-family:'Cinzel',serif;white-space:nowrap;}
+.bn{background:rgba(26,92,26,0.25);color:#90ee90;border:1px solid rgba(26,92,26,0.4);}
+.bv{background:rgba(139,26,26,0.25);color:#ffaaaa;border:1px solid rgba(139,26,26,0.4);}
+.ba{background:rgba(26,60,139,0.25);color:#aaccff;border:1px solid rgba(26,60,139,0.4);}
+.abtn{width:34px;height:34px;border-radius:50%;background:rgba(200,144,42,0.13);border:1px solid rgba(200,144,42,0.35);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.18s;flex-shrink:0;}
+.abtn:active{background:rgba(200,144,42,0.3);transform:scale(0.88);}
+.abtn.playing{border-color:var(--gold-l);background:rgba(200,144,42,0.25);animation:aring 0.7s ease infinite;}
+@keyframes aring{0%,100%{box-shadow:0 0 0 0 rgba(200,144,42,0.5);}50%{box-shadow:0 0 0 10px rgba(200,144,42,0);}}
+.waveform{display:flex;align-items:center;gap:2px;height:16px;margin-top:8px;}
+.wb{width:3px;border-radius:2px;background:var(--gold);opacity:0.35;height:3px;transition:height 0.08s;}
+.wb.on{opacity:0.9;animation:wanim 0.5s ease-in-out infinite;}
+.wb:nth-child(1){animation-delay:0s;}.wb:nth-child(2){animation-delay:0.08s;}
+.wb:nth-child(3){animation-delay:0.16s;}.wb:nth-child(4){animation-delay:0.08s;}
+.wb:nth-child(5){animation-delay:0s;}
+@keyframes wanim{0%,100%{height:3px;}50%{height:13px;}}
+
+/* Grammar */
+.gcard{background:linear-gradient(135deg,rgba(45,21,0,0.92),rgba(13,5,0,0.96));border:1px solid rgba(200,144,42,0.22);border-radius:16px;padding:1.15rem;margin-bottom:10px;animation:cin 0.4s ease both;}
+.gcard:nth-child(2){animation-delay:0.06s;}.gcard:nth-child(3){animation-delay:0.12s;}.gcard:nth-child(4){animation-delay:0.18s;}
+.gt{font-size:15px;font-weight:600;color:var(--gold-l);margin-bottom:3px;}
+.gs{font-size:10px;font-family:'Cinzel',serif;color:var(--gold);opacity:0.55;letter-spacing:0.1em;margin-bottom:9px;}
+.gb{font-size:13px;color:rgba(245,232,204,0.78);line-height:1.7;margin-bottom:8px;}
+.ex{border-left:2px solid var(--gold);padding:6px 11px;margin:5px 0;background:rgba(200,144,42,0.05);border-radius:0 8px 8px 0;}
+.exg{font-size:17px;color:var(--gold-l);}.ext{font-size:11px;color:rgba(200,144,42,0.45);font-family:'Cinzel',serif;font-style:italic;}
+
+/* Quiz */
+.qhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.qscore{font-size:13px;color:var(--gold);background:rgba(200,144,42,0.1);border:1px solid rgba(200,144,42,0.28);border-radius:20px;padding:4px 14px;}
+.qnum{font-size:12px;color:rgba(200,144,42,0.45);}
+.qcard{background:linear-gradient(135deg,rgba(45,21,0,0.92),rgba(13,5,0,0.96));border:1px solid rgba(200,144,42,0.3);border-radius:18px;padding:1.4rem 1.2rem 1.15rem;}
+.qlbl{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(200,144,42,0.38);font-family:'Cinzel',serif;margin-bottom:12px;}
+.qword{font-size:38px;font-weight:700;color:var(--gold-l);text-align:center;margin-bottom:8px;min-height:56px;display:flex;align-items:center;justify-content:center;animation:wp 0.3s ease;}
+@keyframes wp{from{transform:scale(0.82);opacity:0;}to{transform:none;opacity:1;}}
+.qaudio-row{display:flex;justify-content:center;margin-bottom:6px;}
+.qhint{font-size:12px;color:rgba(200,144,42,0.4);text-align:center;font-family:'Cinzel',serif;font-style:italic;margin-bottom:1.2rem;}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.ch{padding:14px 10px;border:1px solid rgba(200,144,42,0.22);border-radius:12px;background:rgba(200,144,42,0.04);color:var(--parch);font-family:'Noto Serif Ethiopic',serif;font-size:13px;text-align:center;cursor:pointer;transition:all 0.15s;line-height:1.35;}
+.ch:active{transform:scale(0.94);}
+.ch.correct{background:rgba(26,92,26,0.3);border-color:#4caf50;color:#a5d6a7;animation:cbounce 0.3s ease;}
+.ch.wrong{background:rgba(139,26,26,0.3);border-color:#f44336;color:#ef9a9a;animation:cshake 0.3s ease;}
+@keyframes cbounce{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+@keyframes cshake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+.feedback{text-align:center;font-size:14px;min-height:22px;margin-bottom:8px;transition:all 0.3s;}
+.nextbtn{width:100%;padding:13px;background:linear-gradient(135deg,var(--dark3),var(--brown));border:1px solid var(--gold);border-radius:12px;color:var(--gold-l);font-family:'Noto Serif Ethiopic',serif;font-size:15px;cursor:pointer;transition:all 0.2s;display:none;}
+.nextbtn:active{transform:scale(0.97);}
+.res-box{text-align:center;padding:2rem 1rem;}
+.res-big{font-size:60px;margin-bottom:1rem;animation:bounce-in 0.5s ease;}
+@keyframes bounce-in{0%{transform:scale(0);}60%{transform:scale(1.2);}100%{transform:scale(1);}}
+.res-sc{font-size:36px;color:var(--gold-l);font-weight:700;}
+.res-msg{font-size:14px;color:rgba(245,232,204,0.65);margin:8px 0 1.5rem;line-height:1.7;}
+.restart{padding:12px 2rem;background:transparent;border:1px solid var(--gold);border-radius:12px;color:var(--gold-l);font-family:'Noto Serif Ethiopic',serif;font-size:15px;cursor:pointer;}
+
+/* Bottom nav */
+.bnav{display:flex;background:var(--dark2);border-radius:18px;margin:0 1rem 0.7rem;border:1px solid rgba(200,144,42,0.18);flex-shrink:0;z-index:10;position:relative;}
+.bnb{flex:1;padding:11px 4px 9px;background:transparent;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all 0.2s;}
+.bnb:active{transform:scale(0.9);}
+.bnb .bni{color:rgba(200,144,42,0.28);transition:color 0.2s;}
+.bnb .bnl{font-size:10px;color:rgba(200,144,42,0.28);font-family:'Cinzel',serif;letter-spacing:0.03em;transition:color 0.2s;}
+.bnb .bnd{width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0;transition:opacity 0.2s;margin-top:1px;}
+.bnb.active .bni{color:var(--gold-l);}.bnb.active .bnl{color:var(--gold);}.bnb.active .bnd{opacity:1;}
+</style>
+</head>
+<body>
+
+<div class="particles" id="pts"></div>
+
+<div id="splash">
+  <svg class="sp-cross" viewBox="0 0 110 110">
+    <defs>
+      <linearGradient id="sg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0c040"/><stop offset="100%" stop-color="#c8902a"/></linearGradient>
+      <linearGradient id="sg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f0c040"/><stop offset="100%" stop-color="#c8902a"/></linearGradient>
+    </defs>
+    <rect x="47" y="10" width="16" height="90" rx="5" fill="url(#sg1)"/>
+    <rect x="10" y="47" width="90" height="16" rx="5" fill="url(#sg2)"/>
+    <circle cx="55" cy="55" r="14" fill="#0d0500"/>
+    <circle cx="55" cy="55" r="10" fill="none" stroke="#e8b84b" stroke-width="2"/>
+    <circle cx="55" cy="55" r="4" fill="#e8b84b"/>
+    <rect x="48" y="5" width="14" height="10" rx="3" fill="#f0c040"/>
+    <rect x="48" y="95" width="14" height="10" rx="3" fill="#f0c040"/>
+    <rect x="5" y="48" width="10" height="14" rx="3" fill="#f0c040"/>
+    <rect x="95" y="48" width="10" height="14" rx="3" fill="#f0c040"/>
+  </svg>
+  <div class="sp-t">ግእዝ ቋንቋ</div>
+  <div class="sp-s">GE'EZ LANGUAGE</div>
+  <div class="sp-bar"><div class="sp-fill"></div></div>
+</div>
+
+<div class="hdr">
+  <div class="hdr-row">
+    <div class="hdr-title"><h1>ግእዝ ቋንቋ</h1><p>GE'EZ LANGUAGE LEARNING</p></div>
+    <div class="hdr-right">
+      <div class="prog-ring">
+        <svg width="44" height="44" viewBox="0 0 44 44">
+          <circle class="pr-bg" cx="22" cy="22" r="18" stroke-dasharray="113"/>
+          <circle class="pr-fg" id="prc" cx="22" cy="22" r="18" stroke-dasharray="113" stroke-dashoffset="113"/>
+        </svg>
+        <div class="pr-txt" id="prpct">0%</div>
+      </div>
+      <div class="hdr-cross">
+        <svg width="20" height="20" viewBox="0 0 20 20">
+          <rect x="8.5" y="2" width="3" height="16" rx="1.2" fill="#c8902a"/>
+          <rect x="2" y="8.5" width="16" height="3" rx="1.2" fill="#c8902a"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="st"><div class="st-n">12</div><div class="st-l">ቀናት</div></div>
+    <div class="st"><div class="st-n">47</div><div class="st-l">ቃላት</div></div>
+    <div class="st"><div class="st-n" id="pct-stat">0%</div><div class="st-l">ውጤት</div></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nb active" onclick="showTab('vocab',this)">ቃላት<span>Vocabulary</span></button>
+  <button class="nb" onclick="showTab('grammar',this)">ሰዋሰው<span>Grammar</span></button>
+  <button class="nb" onclick="showTab('quiz',this)">ፈተና<span>Quiz</span></button>
+</div>
+
+<div class="content">
+  <div id="vocab" class="sec active">
+    <div class="sec-ttl">የዛሬ ቃላት</div>
+    <div id="vlist"></div>
+    <div class="ornament">✦ ✦ ✦</div>
+  </div>
+
+  <div id="grammar" class="sec">
+    <div class="sec-ttl">ሰዋሰው ደንቦች</div>
+    <div class="gcard"><div class="gt">1. ብዙ ቁጥር — Plural Forms</div><div class="gs">FORMING THE PLURAL</div><div class="gb">ግእዝ ብዙ ቁጥር ለሰዎች "-ān" ምልክት ይጠቀማል፣ ለነገሮች "-āt" ይጠቅማል።</div><div class="ex"><div class="exg">ቅዱስ → ቅዱሳን</div><div class="ext">Holy one → Saints</div></div><div class="ex"><div class="exg">ነቢይ → ነቢያት</div><div class="ext">Prophet → Prophets</div></div></div>
+    <div class="gcard"><div class="gt">2. የጊዜ ስርዓት — Verb Tenses</div><div class="gs">PAST AND IMPERFECT</div><div class="gb">ያለፈ ጊዜ (Perfect) ድርጊቱ እንደተፈጸመ ያሳያል። ያልተፈጸመ ጊዜ (Imperfect) ቀጣይ ድርጊት ያሳያል።</div><div class="ex"><div class="exg">አምነ — He believed</div><div class="ext">Perfect — completed</div></div><div class="ex"><div class="exg">ይኄድ — He goes</div><div class="ext">Imperfect — ongoing</div></div></div>
+    <div class="gcard"><div class="gt">3. ተውሳክ ቃላት — Prefixes</div><div class="gs">WA- AND ZA- PREFIXES</div><div class="gb">"ወ" (wa) ማለት "and" ነው። "ዘ" (za) ደግሞ "of / who" ማለት ሲሆን ባለቤትነትን ያሳያል።</div><div class="ex"><div class="exg">ወልድ ወመንፈስ</div><div class="ext">Son and Spirit</div></div><div class="ex"><div class="exg">ዘእግዚአብሔር</div><div class="ext">Of God / Heavenly</div></div></div>
+    <div class="gcard"><div class="gt">4. ወካይ ስሞች — Pronouns</div><div class="gs">PERSONAL PRONOUNS</div><div class="gb">ግእዝ ወካይ ስሞች ፆታና ቁጥር ያለው ስርዓት አላቸው።</div><div class="ex"><div class="exg">አነ — እኔ (I)</div><div class="ext">First person singular</div></div><div class="ex"><div class="exg">አንተ / አንቲ</div><div class="ext">You (m / f)</div></div><div class="ex"><div class="exg">ውእቱ / ይእቲ</div><div class="ext">He / She</div></div></div>
+    <div class="ornament">✦ ✦ ✦</div>
+  </div>
+
+  <div id="quiz" class="sec">
+    <div class="qhdr"><span class="qnum" id="qnum">ጥያቄ 1/10</span><span class="qscore" id="qsc">✦ 0 ነጥብ</span></div>
+    <div id="qmain">
+      <div class="qcard">
+        <div class="qlbl">ትርጉሙ ምንድን ነው?</div>
+        <div class="qword" id="qw">—</div>
+        <div class="qaudio-row"><div class="abtn" id="qabt" onclick="playQAudio()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 3l7 4-7 4V3z" fill="#c8902a"/></svg></div></div>
+        <div class="qhint" id="qhint"></div>
+        <div class="choices" id="qch"></div>
+        <div class="feedback" id="qfb"></div>
+        <button class="nextbtn" id="nxtbtn" onclick="nextQ()">ቀጣይ →</button>
+      </div>
+    </div>
+    <div id="qres" style="display:none">
+      <div class="res-box">
+        <div class="res-big" id="remoji">🏆</div>
+        <div class="res-sc" id="rsc"></div>
+        <div class="res-msg" id="rmsg"></div>
+        <button class="restart" onclick="startQuiz()">እንደገና ሞክር</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bnav">
+  <button class="bnb active" onclick="showTab('vocab',null,this)">
+    <svg class="bni" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span class="bnl">ቃላት</span><div class="bnd"></div>
+  </button>
+  <button class="bnb" onclick="showTab('grammar',null,this)">
+    <svg class="bni" width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+    <span class="bnl">ሰዋሰው</span><div class="bnd"></div>
+  </button>
+  <button class="bnb" onclick="showTab('quiz',null,this)">
+    <svg class="bni" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span class="bnl">ፈተና</span><div class="bnd"></div>
+  </button>
+  <button class="bnb" onclick="showTab('vocab',null,this)">
+    <svg class="bni" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span class="bnl">መገለጫ</span><div class="bnd"></div>
+  </button>
+</div>
+
+<script>
+const words=[
+  {g:'እግዚአብሔር',l:'ʾEgziʾabḥēr',m:'God / Lord',t:'bn',tl:'ስም',ac:'#c8902a',f:[220,280,320,240,200]},
+  {g:'ጸሎት',l:'Ṣelot',m:'Prayer',t:'bn',tl:'ስም',ac:'#e8b84b',f:[300,260,230]},
+  {g:'ቅዱስ',l:'Qeddus',m:'Holy / Saint',t:'ba',tl:'ቅጽል',ac:'#88aaee',f:[350,280,320]},
+  {g:'አምነ',l:'ʾAmna',m:'He believed',t:'bv',tl:'ግስ',ac:'#ffaaaa',f:[280,240,260]},
+  {g:'ወንጌል',l:'Wengel',m:'Gospel',t:'bn',tl:'ስም',ac:'#c8902a',f:[260,300,270]},
+  {g:'ፈቀደ',l:'Feqqada',m:'He loved / willed',t:'bv',tl:'ግስ',ac:'#ffaaaa',f:[320,300,260,280]},
+  {g:'ሃይማኖት',l:'Hāymānot',m:'Faith / Religion',t:'bn',tl:'ስም',ac:'#e8b84b',f:[240,280,260,220]},
+  {g:'ሰማይ',l:'Samāy',m:'Heaven / Sky',t:'bn',tl:'ስም',ac:'#88aaee',f:[300,350,280]},
+  {g:'ነቢይ',l:'Nabiy',m:'Prophet',t:'bn',tl:'ስም',ac:'#c8902a',f:[280,320,260]},
+  {g:'ርትዕ',l:'Retʿe',m:'Righteous',t:'ba',tl:'ቅጽል',ac:'#88aaee',f:[340,260,300]},
+];
+
+let actx=null,curW=null;
+function getCtx(){if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();return actx;}
+
+function playTone(w,btn){
+  try{
+    const ctx=getCtx();
+    const dur=0.19;
+    let t=ctx.currentTime+0.05;
+    if(btn){
+      btn.classList.add('playing');
+      const wf=btn.closest('.wcard');
+      if(wf)wf.querySelectorAll('.wb').forEach(b=>b.classList.add('on'));
+      const total=w.f.length*dur*1000+350;
+      setTimeout(()=>{
+        btn.classList.remove('playing');
+        if(wf)wf.querySelectorAll('.wb').forEach(b=>b.classList.remove('on'));
+      },total);
+    }
+    w.f.forEach((freq,i)=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.type='sine';o.frequency.value=freq;
+      const s=t+i*dur;
+      g.gain.setValueAtTime(0,s);
+      g.gain.linearRampToValueAtTime(0.28,s+0.03);
+      g.gain.exponentialRampToValueAtTime(0.001,s+dur);
+      o.start(s);o.stop(s+dur+0.05);
+    });
+  }catch(e){}
+}
+
+function playCorrect(){
+  try{
+    const ctx=getCtx();
+    [523,659,784,1046].forEach((f,i)=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.type='sine';o.frequency.value=f;
+      const t=ctx.currentTime+i*0.1;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(0.22,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.22);
+      o.start(t);o.stop(t+0.25);
+    });
+  }catch(e){}
+}
+
+function playWrong(){
+  try{
+    const ctx=getCtx();
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);
+    o.type='sawtooth';o.frequency.value=140;
+    g.gain.setValueAtTime(0.18,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.35);
+    o.start(ctx.currentTime);o.stop(ctx.currentTime+0.38);
+  }catch(e){}
+}
+
+function playQAudio(){if(curW)playTone(curW,document.getElementById('qabt'));}
+
+function buildVocab(){
+  const l=document.getElementById('vlist');
+  l.innerHTML=words.map((w,i)=>`
+  <div class="wcard" style="--ac:${w.ac};animation-delay:${i*0.055}s" onclick="playTone(words[${i}],this.querySelector('.abtn'))">
+    <div class="wt">
+      <div><div class="wgeez">${w.g}</div><div class="wlatin">${w.l}</div></div>
+      <div class="wright">
+        <span class="wbadge ${w.t}">${w.tl}</span>
+        <div class="abtn" onclick="event.stopPropagation();playTone(words[${i}],this)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 3l7 4-7 4V3z" fill="#c8902a"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="wmeaning">${w.m}</div>
+    <div class="waveform"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+  </div>`).join('');
+}
+
+let qlist=[],qi=0,score=0,answered=false;
+function sh(a){return[...a].sort(()=>Math.random()-0.5);}
+
+function startQuiz(){
+  qlist=sh(words).slice(0,10);qi=0;score=0;answered=false;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qres').style.display='none';
+  loadQ();
+}
+
+function loadQ(){
+  if(qi>=qlist.length){showResult();return;}
+  const w=qlist[qi];curW=w;answered=false;
+  document.getElementById('qnum').textContent='ጥያቄ '+(qi+1)+'/'+qlist.length;
+  document.getElementById('qsc').textContent='✦ '+score+' ነጥብ';
+  document.getElementById('qw').textContent=w.g;
+  document.getElementById('qhint').textContent=w.l;
+  document.getElementById('qfb').textContent='';
+  document.getElementById('nxtbtn').style.display='none';
+  document.getElementById('qabt').classList.remove('playing');
+  const wrongs=sh(words.filter(x=>x.m!==w.m)).slice(0,3).map(x=>x.m);
+  const chs=sh([w.m,...wrongs]);
+  const el=document.getElementById('qch');
+  el.innerHTML='';
+  chs.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='ch';b.textContent=c;
+    b.onclick=()=>checkA(c,w.m);
+    el.appendChild(b);
+  });
+  updateProg(score,words.length);
+  setTimeout(()=>playTone(w,document.getElementById('qabt')),450);
+}
+
+function checkA(sel,correct){
+  if(answered)return;answered=true;
+  document.querySelectorAll('.ch').forEach(b=>{
+    b.style.pointerEvents='none';
+    if(b.textContent===correct)b.classList.add('correct');
+    else if(b.textContent===sel)b.classList.add('wrong');
+  });
+  if(sel===correct){
+    score++;
+    document.getElementById('qfb').textContent='✓ ትክክል ነው!';
+    document.getElementById('qfb').style.color='#90ee90';
+    playCorrect();
+  } else {
+    document.getElementById('qfb').textContent='✗ መልሱ: '+correct;
+    document.getElementById('qfb').style.color='#ffaaaa';
+    playWrong();
+  }
+  document.getElementById('qsc').textContent='✦ '+score+' ነጥብ';
+  document.getElementById('nxtbtn').style.display='block';
+  qi++;
+}
+
+function nextQ(){loadQ();}
+
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  document.getElementById('qres').style.display='block';
+  const pct=Math.round((score/qlist.length)*100);
+  let e='🕯️',msg='';
+  if(pct>=90){e='🏆';msg='እጅግ በጣም ጥሩ! የግእዝ ቋንቋ ፍቅር ታሳያለህ።';playCorrect();}
+  else if(pct>=70){e='✦';msg='ጥሩ ነው! ቀጥልና ትሻሻላለህ።';}
+  else if(pct>=50){e='📖';msg='ቀጥል። ቃላቱን እንደገና ውሰድ።';}
+  else{e='🕯️';msg='አታስፈራ! ሁሉም ሰው ከጅምሩ ይጀምራል።';}
+  document.getElementById('remoji').textContent=e;
+  document.getElementById('rsc').textContent=score+'/'+qlist.length+' ('+pct+'%)';
+  document.getElementById('rmsg').textContent=msg;
+  updateProg(score,words.length);
+}
+
+function updateProg(s,total){
+  const pct=Math.round((s/total)*100);
+  const r=18,c=2*Math.PI*r;
+  document.getElementById('prc').style.strokeDashoffset=c-(pct/100)*c;
+  document.getElementById('prpct').textContent=pct+'%';
+  document.getElementById('pct-stat').textContent=pct+'%';
+}
+
+function showTab(id,topBtn,btmBtn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.bnb').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(topBtn)topBtn.classList.add('active');
+  if(btmBtn)btmBtn.classList.add('active');
+  const m={vocab:0,grammar:1,quiz:2};
+  if(m[id]!==undefined){
+    document.querySelectorAll('.nb')[m[id]].classList.add('active');
+    document.querySelectorAll('.bnb')[m[id]].classList.add('active');
+  }
+  if(id==='quiz')startQuiz();
+}
+
+function createParticles(){
+  const c=document.getElementById('pts');
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='p';
+    p.style.cssText=`left:${Math.random()*100}%;animation-duration:${9+Math.random()*12}s;animation-delay:${Math.random()*18}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`;
+    c.appendChild(p);
+  }
+}
+
+window.addEventListener('load',()=>{
+  createParticles();buildVocab();startQuiz();
+  setTimeout(()=>{
+    const s=document.getElementById('splash');
+    s.style.opacity='0';
+    setTimeout(()=>s.style.display='none',800);
+  },3200);
+});
+</script>
+</body>
+</html>
