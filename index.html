@@ -259,7 +259,7 @@ firebase.initializeApp({
     <input class="linput" id="lname" type="text" placeholder="ስምህ (ለምዝገባ ብቻ)" style="display:none"/>
     <button class="lbtn" id="lbtn" onclick="doAuth()">ግባ</button>
     <div class="lerr" id="lerr"></div>
-    <div class="lskip" onclick="skipLogin()">ያለ account ቀጥል →</div>
+    
   </div>
 </div>
 
@@ -711,9 +711,7 @@ function doAuth() {
   }
 }
 
-function skipLogin() {
-  document.getElementById('login-wrap').classList.add('hide');
-}
+
 
 function getErrMsg(code) {
   if(code==='auth/user-not-found') return 'ይህ account አልተገኘም!';
@@ -825,9 +823,7 @@ function doAuth() {
   }
 }
 
-function skipLogin() {
-  document.getElementById('login-wrap').classList.add('hide');
-}
+
 
 function getErrMsg(code) {
   if(code==='auth/user-not-found') return 'ይህ account አልተገኘም!';
