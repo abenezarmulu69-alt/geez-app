@@ -231,6 +231,17 @@ firebase.initializeApp({
   appId: "1:713013615315:web:42cfb7e7157351b8249226"
 });
 </script>
+
+<!-- OneSignal -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "21c1d8c5-b751-4543-9c35-5cf71a525eee",
+    });
+  });
+</script>
 </head>
 <body>
 
