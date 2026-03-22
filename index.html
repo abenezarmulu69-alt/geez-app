@@ -815,3 +815,270 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0400">
+<title>ግእዝ ቋንቋ | መግቢያ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8902a;--gold-l:#e8b84b;
+  --bg:#0a0400;--bg2:#160800;--bg3:#251200;--bg4:#3a1e00;
+  --parch:#f0e0c0;
+  --card-bg:linear-gradient(135deg,rgba(37,18,0,0.92),rgba(10,4,0,0.96));
+  --card-border:rgba(200,144,42,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);
+  font-family:'Noto Serif Ethiopic',serif;
+  color:var(--parch);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* Login Container */
+.login-container{max-width:400px;width:100%;margin:0 auto;}
+
+/* Cross Animation */
+.cross-icon{
+  width:80px;
+  height:80px;
+  margin:0 auto 25px;
+  background:radial-gradient(circle,rgba(200,144,42,0.3),transparent);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:pulse 1.5s ease-in-out infinite;
+}
+.cross-icon svg{width:50px;height:50px;}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:0.7;}
+  50%{transform:scale(1.1);opacity:1;}
+}
+
+/* Login Card */
+.login-card{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:28px;
+  padding:35px 28px;
+  text-align:center;
+  backdrop-filter:blur(5px);
+}
+.login-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:24px;
+  color:var(--gold-l);
+  margin-bottom:8px;
+}
+.login-sub{
+  font-size:11px;
+  color:var(--gold);
+  opacity:0.6;
+  margin-bottom:30px;
+  letter-spacing:2px;
+}
+.login-tabs{
+  display:flex;
+  gap:12px;
+  margin-bottom:28px;
+  background:rgba(200,144,42,0.08);
+  border-radius:60px;
+  padding:5px;
+}
+.ltab{
+  flex:1;
+  padding:12px;
+  background:transparent;
+  border:none;
+  border-radius:50px;
+  color:rgba(200,144,42,0.6);
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  font-family:inherit;
+  transition:all 0.2s;
+}
+.ltab.on{
+  background:rgba(200,144,42,0.25);
+  color:var(--gold-l);
+}
+.login-form{width:100%;}
+.linput{
+  width:100%;
+  padding:15px;
+  background:rgba(200,144,42,0.08);
+  border:1px solid rgba(200,144,42,0.25);
+  border-radius:16px;
+  color:var(--parch);
+  font-size:15px;
+  margin-bottom:15px;
+  outline:none;
+  font-family:inherit;
+}
+.linput:focus{border-color:var(--gold);}
+.pwd-wrapper{position:relative;}
+.toggle-pwd{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  background:transparent;
+  border:none;
+  color:var(--gold);
+  font-size:18px;
+  cursor:pointer;
+}
+.lbtn{
+  width:100%;
+  padding:15px;
+  background:linear-gradient(135deg,var(--bg3),var(--bg4));
+  border:1.5px solid var(--gold);
+  border-radius:16px;
+  color:var(--gold-l);
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:12px;
+  font-family:inherit;
+  transition:all 0.2s;
+}
+.lbtn:active{transform:scale(0.98);}
+.lerr{
+  font-size:12px;
+  color:#ef9a9a;
+  text-align:center;
+  min-height:40px;
+  margin-top:15px;
+}
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcH6IWpeXq3YemyisYZtAdt2DoRSgAP38",
+    authDomain: "geezapp-ff6e0.firebaseapp.com",
+    projectId: "geezapp-ff6e0",
+    storageBucket: "geezapp-ff6e0.firebasestorage.app",
+    messagingSenderId: "713013615315",
+    appId: "1:713013615315:web:42cfb7e7157351b8249226"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="cross-icon">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2.5">
+      <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor"/>
+      <line x1="20" y1="50" x2="80" y2="50" stroke="currentColor"/>
+      <circle cx="50" cy="50" r="18" stroke="currentColor" fill="none"/>
+      <circle cx="50" cy="50" r="8" stroke="currentColor" fill="none"/>
+    </svg>
+  </div>
+  
+  <div class="login-card">
+    <div class="login-title">ግእዝ ቋንቋ</div>
+    <div class="login-sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+    
+    <div class="login-tabs">
+      <button class="ltab on" id="tab-in" onclick="switchTab('in')">ግባ</button>
+      <button class="ltab" id="tab-up" onclick="switchTab('up')">ተመዝገብ</button>
+    </div>
+    
+    <div class="login-form">
+      <input class="linput" id="lemail" type="email" placeholder="Email አድራሻ">
+      <div class="pwd-wrapper">
+        <input class="linput" id="lpass" type="password" placeholder="የሚስጥር ቁጥር">
+        <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()">👁️</button>
+      </div>
+      <input class="linput" id="lname" type="text" placeholder="ስምህ (ለምዝገባ ብቻ)" style="display:none">
+      <button class="lbtn" id="lbtn" onclick="doAuth()">ግባ</button>
+      <div class="lerr" id="lerr"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let loginMode = 'in';
+const auth = firebase.auth();
+
+// When user logs in, show alert
+auth.onAuthStateChanged(user => {
+  if (user) {
+    alert(`እንኳን ደህና መጣህ! ${user.email?.split('@')[0] || 'ተጠቃሚ'} 🎉`);
+    // You can redirect or do something else here
+  }
+});
+
+function switchTab(mode) {
+  loginMode = mode;
+  document.getElementById('tab-in').classList.toggle('on', mode === 'in');
+  document.getElementById('tab-up').classList.toggle('on', mode === 'up');
+  document.getElementById('lbtn').textContent = mode === 'in' ? 'ግባ' : 'ተመዝገብ';
+  document.getElementById('lname').style.display = mode === 'up' ? 'block' : 'none';
+  document.getElementById('lerr').textContent = '';
+}
+
+function doAuth() {
+  const email = document.getElementById('lemail').value.trim();
+  const pass = document.getElementById('lpass').value;
+  const name = document.getElementById('lname').value.trim();
+  const err = document.getElementById('lerr');
+  
+  if (!email || !pass) {
+    err.textContent = 'Email እና password ያስፈልጋል!';
+    return;
+  }
+  
+  const btn = document.getElementById('lbtn');
+  btn.textContent = '...';
+  
+  if (loginMode === 'in') {
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(() => {})
+      .catch(e => {
+        err.textContent = e.message;
+        btn.textContent = 'ግባ';
+      });
+  } else {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((userCred) => {
+        if (name) userCred.user.updateProfile({ displayName: name });
+      })
+      .catch(e => {
+        err.textContent = e.message;
+        btn.textContent = 'ተመዝገብ';
+      });
+  }
+}
+
+function togglePasswordVisibility() {
+  const pwd = document.getElementById('lpass');
+  const btn = document.querySelector('.toggle-pwd');
+  if (pwd.type === 'password') {
+    pwd.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    pwd.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+</script>
+
+</body>
+</html>
