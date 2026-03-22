@@ -206,6 +206,229 @@ body.day .hdr{background:linear-gradient(180deg,#e8d4a0 0%,var(--bg) 100%);}
     <div class="stat"><div class="sn">7</div><div class="sl">ዜማዎች</div></div>
   </div>
 </div>
+
+  <!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0400">
+<title>ግእዝ ቋንቋ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8902a;--gold-l:#e8b84b;
+  --bg:#0a0400;--bg2:#160800;--bg3:#251200;--bg4:#3a1e00;
+  --parch:#f0e0c0;
+  --card-bg:linear-gradient(135deg,rgba(37,18,0,0.92),rgba(10,4,0,0.96));
+  --card-border:rgba(200,144,42,0.18);
+  --text-main:#f0e0c0;
+  --text-sub:rgba(240,220,190,0.8);
+}
+body.day{
+  --bg:#f5f0e8;--bg2:#ede5d8;--bg3:#e2d5c0;--bg4:#d4c4a8;
+  --parch:#2a2418;
+  --card-bg:linear-gradient(135deg,rgba(255,250,240,0.98),rgba(250,240,225,0.98));
+  --card-border:rgba(100,70,30,0.2);
+  --text-main:#2c241a;
+  --text-sub:rgba(44,36,26,0.8);
+  --gold-l:#9b6a1c;
+  --gold:#aa7a2a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--parch);min-height:100vh;transition:background 0.3s;}
+
+/* Login Container */
+.login-container{max-width:400px;width:100%;margin:0 auto;padding:20px;}
+
+/* Cross Animation */
+.cross-icon{width:60px;height:60px;margin:0 auto 10px;background:radial-gradient(circle,rgba(200,144,42,0.3),transparent);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s ease-in-out infinite;}
+.cross-icon svg{width:40px;height:40px;}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:0.7;}
+  50%{transform:scale(1.1);opacity:1;}
+}
+
+.welcome-text{text-align:center;margin-bottom:15px;}
+.welcome-text .greeting{font-size:14px;color:var(--gold-l);}
+.welcome-text .ethiopia{font-size:18px;font-weight:600;color:var(--gold);}
+
+/* Login Card */
+.login-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:24px;padding:25px 20px;text-align:center;}
+.login-title{font-family:'Cinzel Decorative',serif;font-size:20px;color:var(--gold-l);}
+.login-sub{font-size:10px;color:var(--gold);opacity:0.6;margin-bottom:20px;}
+.login-tabs{display:flex;gap:8px;margin-bottom:20px;background:rgba(200,144,42,0.08);border-radius:50px;padding:4px;}
+.ltab{flex:1;padding:10px;background:transparent;border:none;border-radius:40px;color:rgba(200,144,42,0.5);font-size:14px;cursor:pointer;}
+.ltab.on{background:rgba(200,144,42,0.2);color:var(--gold-l);}
+.linput{width:100%;padding:14px;background:rgba(200,144,42,0.08);border:1px solid rgba(200,144,42,0.2);border-radius:14px;color:var(--parch);font-size:14px;margin-bottom:12px;outline:none;}
+.pwd-wrapper{position:relative;}
+.toggle-pwd{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--gold);font-size:16px;cursor:pointer;}
+.lbtn{width:100%;padding:14px;background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1.5px solid var(--gold);border-radius:14px;color:var(--gold-l);font-size:15px;cursor:pointer;margin-top:6px;}
+.lerr{font-size:12px;color:#ef9a9a;text-align:center;margin-top:8px;}
+
+/* Main App (after login) */
+#main-app{display:none;max-width:500px;width:100%;margin:0 auto;}
+.app-header{background:linear-gradient(180deg,#1c0c00 0%,var(--bg) 100%);padding:15px;border-radius:16px 16px 0 0;}
+.app-header .hr{display:flex;justify-content:space-between;align-items:center;}
+.app-header h1{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--gold-l);}
+.header-buttons{display:flex;gap:12px;}
+.header-btn{width:40px;height:40px;border-radius:50%;background:rgba(200,144,42,0.15);border:1px solid rgba(200,144,42,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;}
+.header-btn.off{opacity:0.5;}
+.logout-btn{background:rgba(200,144,42,0.2);}
+.welcome-user{text-align:center;padding:30px;background:var(--card-bg);border-radius:20px;margin-top:20px;}
+.welcome-user h2{color:var(--gold-l);margin-bottom:10px;}
+.orn{text-align:center;color:var(--gold);font-size:12px;opacity:0.5;margin-top:20px;}
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcH6IWpeXq3YemyisYZtAdt2DoRSgAP38",
+    authDomain: "geezapp-ff6e0.firebaseapp.com",
+    projectId: "geezapp-ff6e0",
+    storageBucket: "geezapp-ff6e0.firebasestorage.app",
+    messagingSenderId: "713013615315",
+    appId: "1:713013615315:web:42cfb7e7157351b8249226"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="login-container">
+  <div class="cross-icon">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2">
+      <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor"/>
+      <line x1="20" y1="50" x2="80" y2="50" stroke="currentColor"/>
+      <circle cx="50" cy="50" r="15" stroke="currentColor" fill="none"/>
+      <circle cx="50" cy="50" r="8" stroke="currentColor" fill="none"/>
+    </svg>
+  </div>
+  
+  <div class="welcome-text">
+    <div class="greeting">🇪🇹 ሰላም ለኢትዮጵያ 🕊️</div>
+  </div>
+  
+  <div class="login-card">
+    <div class="login-title">ግእዝ ቋንቋ</div>
+    <div class="login-sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+    
+    <div class="login-tabs">
+      <button class="ltab on" id="tab-in" onclick="switchTab('in')">ግባ</button>
+      <button class="ltab" id="tab-up" onclick="switchTab('up')">ተመዝገብ</button>
+    </div>
+    
+    <div class="login-form">
+      <input class="linput" id="lemail" type="email" placeholder="Email አድራሻ">
+      <div class="pwd-wrapper">
+        <input class="linput" id="lpass" type="password" placeholder="የሚስጥር ቁጥር">
+        <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()">👁️</button>
+      </div>
+      <input class="linput" id="lname" type="text" placeholder="ስምህ (ለምዝገባ ብቻ)" style="display:none">
+      <button class="lbtn" id="lbtn" onclick="doAuth()">ግባ</button>
+      <div class="lerr" id="lerr"></div>
+    </div>
+  </div>
+</div>
+
+// ======================== GLOBAL ========================
+let isDay = false;
+let isSoundOn = true;
+
+// ======================== FIREBASE AUTH ========================
+let loginMode = 'in';
+const auth = firebase.auth();
+
+auth.onAuthStateChanged(user => {
+  const loginScreen = document.getElementById('login-screen');
+  const mainApp = document.getElementById('main-app');
+  
+  if (user) {
+    loginScreen.style.display = 'none';
+    mainApp.style.display = 'block';
+    const nameSpan = document.getElementById('userName');
+    if (nameSpan) {
+      nameSpan.innerHTML = `እንኳን ደህና መጣህ፣ ${user.email?.split('@')[0] || 'ተጠቃሚ'}! 🙏`;
+    }
+  } else {
+    loginScreen.style.display = 'block';
+    mainApp.style.display = 'none';
+    resetLoginForm();
+  }
+});
+
+function switchTab(mode) {
+  loginMode = mode;
+  document.getElementById('tab-in').classList.toggle('on', mode === 'in');
+  document.getElementById('tab-up').classList.toggle('on', mode === 'up');
+  document.getElementById('lbtn').textContent = mode === 'in' ? 'ግባ' : 'ተመዝገብ';
+  document.getElementById('lname').style.display = mode === 'up' ? 'block' : 'none';
+  document.getElementById('lerr').textContent = '';
+}
+
+function doAuth() {
+  const email = document.getElementById('lemail').value.trim();
+  const pass = document.getElementById('lpass').value;
+  const name = document.getElementById('lname').value.trim();
+  const err = document.getElementById('lerr');
+  
+  if (!email || !pass) {
+    err.textContent = 'Email እና password ያስፈልጋል!';
+    return;
+  }
+  
+  const btn = document.getElementById('lbtn');
+  btn.textContent = '...';
+  
+  if (loginMode === 'in') {
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(() => {})
+      .catch(e => {
+        err.textContent = e.message;
+        btn.textContent = 'ግባ';
+      });
+  } else {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((userCred) => {
+        if (name) userCred.user.updateProfile({ displayName: name });
+      })
+      .catch(e => {
+        err.textContent = e.message;
+        btn.textContent = 'ተመዝገብ';
+      });
+  }
+}
+
+function togglePasswordVisibility() {
+  const pwd = document.getElementById('lpass');
+  const btn = document.querySelector('.toggle-pwd');
+  if (pwd.type === 'password') {
+    pwd.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    pwd.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+function resetLoginForm() {
+  document.getElementById('lemail').value = '';
+  document.getElementById('lpass').value = '';
+  document.getElementById('lname').value = '';
+  document.getElementById('lerr').textContent = '';
+}
+
+function signOut() {
+  auth.signOut();
+}
+</script>
+</body>
+</html>
 <!-- SEARCH BAR -->
 <div class="search-container">
   <div class="search-box">
