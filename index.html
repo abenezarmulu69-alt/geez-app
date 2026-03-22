@@ -821,36 +821,32 @@ setTimeout(()=>{
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0a0400">
 <title>ግእዝ ቋንቋ</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --gold:#c8902a;--gold-l:#e8b84b;
-  --bg:#0a0400;--bg2:#160800;--bg3:#251200;--bg4:#3a1e00;
-  --parch:#f0e0c0;
-  --card-bg:linear-gradient(135deg,rgba(37,18,0,0.92),rgba(10,4,0,0.96));
-  --card-border:rgba(200,144,42,0.18);
-  --text-main:#f0e0c0;
-  --text-sub:rgba(240,220,190,0.8);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body.day{
-  --bg:#f5f0e8;--bg2:#ede5d8;--bg3:#e2d5c0;--bg4:#d4c4a8;
-  --parch:#2a2418;
-  --card-bg:linear-gradient(135deg,rgba(255,250,240,0.98),rgba(250,240,225,0.98));
-  --card-border:rgba(100,70,30,0.2);
-  --text-main:#2c241a;
-  --text-sub:rgba(44,36,26,0.8);
-  --gold-l:#9b6a1c;
-  --gold:#aa7a2a;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--parch);min-height:100vh;transition:background 0.3s;}
 
-/* Login Screen - Full screen, centered */
-#login-screen {
+:root {
+  --gold: #c8902a;
+  --gold-light: #e8b84b;
+  --bg: #0a0400;
+  --bg-card: linear-gradient(135deg, #251200, #0a0400);
+  --text: #f0e0c0;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif Ethiopic', serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ========== LOGIN PAGE - FULLSCREEN ========== */
+#loginPage {
   position: fixed;
   top: 0;
   left: 0;
@@ -861,89 +857,246 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow-y: auto;
 }
-.login-container{max-width:400px;width:90%;margin:0 auto;}
+
+.login-container {
+  max-width: 400px;
+  width: 90%;
+  padding: 20px;
+}
 
 /* Cross Animation */
-.cross-icon{width:70px;height:70px;margin:0 auto 20px;background:radial-gradient(circle,rgba(200,144,42,0.3),transparent);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s ease-in-out infinite;}
-.cross-icon svg{width:45px;height:45px;}
-@keyframes pulse{
-  0%,100%{transform:scale(1);opacity:0.7;}
-  50%{transform:scale(1.1);opacity:1;}
+.cross {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background: radial-gradient(circle, rgba(200,144,66,0.2), transparent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s ease infinite;
+}
+.cross svg { width: 45px; height: 45px; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
 }
 
 /* Login Card */
-.login-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:24px;padding:30px 25px;text-align:center;}
-.login-title{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold-l);margin-bottom:5px;}
-.login-sub{font-size:11px;color:var(--gold);opacity:0.6;margin-bottom:25px;letter-spacing:2px;}
-.login-tabs{display:flex;gap:10px;margin-bottom:25px;background:rgba(200,144,42,0.08);border-radius:50px;padding:5px;}
-.ltab{flex:1;padding:12px;background:transparent;border:none;border-radius:40px;color:rgba(200,144,42,0.6);font-size:15px;cursor:pointer;font-family:inherit;}
-.ltab.on{background:rgba(200,144,42,0.25);color:var(--gold-l);}
-.login-form{width:100%;}
-.linput{width:100%;padding:14px;background:rgba(200,144,42,0.08);border:1px solid rgba(200,144,42,0.2);border-radius:14px;color:var(--parch);font-size:14px;margin-bottom:14px;outline:none;font-family:inherit;}
-.linput:focus{border-color:var(--gold);}
-.pwd-wrapper{position:relative;}
-.toggle-pwd{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--gold);font-size:18px;cursor:pointer;}
-.lbtn{width:100%;padding:14px;background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1.5px solid var(--gold);border-radius:14px;color:var(--gold-l);font-size:16px;cursor:pointer;margin-top:10px;font-family:inherit;}
-.lbtn:active{transform:scale(0.98);}
-.lerr{font-size:12px;color:#ef9a9a;text-align:center;min-height:40px;margin-top:12px;}
+.login-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(200,144,66,0.3);
+  border-radius: 28px;
+  padding: 35px 25px;
+  text-align: center;
+}
+.login-card h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 24px;
+  color: var(--gold-light);
+  margin-bottom: 5px;
+}
+.login-card .sub {
+  font-size: 11px;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  background: rgba(200,144,66,0.1);
+  border-radius: 50px;
+  padding: 5px;
+}
+.tab {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 40px;
+  color: rgba(200,144,66,0.6);
+  font-size: 15px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tab.active {
+  background: rgba(200,144,66,0.25);
+  color: var(--gold-light);
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 14px;
+  background: rgba(200,144,66,0.08);
+  border: 1px solid rgba(200,144,66,0.25);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 14px;
+  outline: none;
+  font-family: inherit;
+}
+.input:focus { border-color: var(--gold); }
+.password-wrapper {
+  position: relative;
+}
+.toggle-pwd {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #3a1e00, #251200);
+  border: 1.5px solid var(--gold);
+  border-radius: 14px;
+  color: var(--gold-light);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn:active { transform: scale(0.98); }
+.error {
+  font-size: 12px;
+  color: #ef9a9a;
+  text-align: center;
+  margin-top: 12px;
+  min-height: 40px;
+}
 
 /* Divine Message */
-.divine-message {
-  background: linear-gradient(135deg, rgba(200,144,42,0.1), rgba(200,144,42,0.02));
-  border-left: 3px solid var(--gold);
+.message {
   margin-top: 20px;
-  padding: 10px 15px;
+  padding: 12px;
+  background: rgba(200,144,66,0.05);
+  border-left: 3px solid var(--gold);
   border-radius: 12px;
   text-align: center;
 }
-.divine-message .text {
+.message .text {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-main);
   line-height: 1.4;
 }
-.divine-message .sub {
+.message .small {
   font-size: 10px;
-  color: rgba(200,144,42,0.6);
+  color: rgba(200,144,66,0.6);
   margin-top: 5px;
 }
 
-/* Main App - Hidden by default */
-#main-app {
+/* ========== MAIN APP - HIDDEN BY DEFAULT ========== */
+#mainApp {
   display: none;
   max-width: 500px;
-  width: 100%;
   margin: 0 auto;
   padding: 20px;
 }
-.app-header{background:linear-gradient(180deg,#1c0c00 0%,var(--bg) 100%);padding:15px 20px;border-radius:20px 20px 0 0;}
-.app-header .hr{display:flex;justify-content:space-between;align-items:center;}
-.app-header h1{font-family:'Cinzel Decorative',serif;font-size:20px;color:var(--gold-l);}
-.header-buttons{display:flex;gap:12px;}
-.header-btn{width:42px;height:42px;border-radius:50%;background:rgba(200,144,42,0.15);border:1px solid rgba(200,144,42,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;}
-.header-btn:active{transform:scale(0.95);}
-.logout-btn{background:rgba(200,144,42,0.2);}
-.welcome-user{text-align:center;padding:40px 20px;background:var(--card-bg);border-radius:20px;margin-top:20px;}
-.welcome-user h2{color:var(--gold-l);margin-bottom:12px;}
-.welcome-user p{color:var(--text-sub);}
-.orn{text-align:center;color:var(--gold);font-size:12px;opacity:0.5;margin-top:30px;}
+.app-header {
+  background: linear-gradient(180deg, #1c0c00, var(--bg));
+  padding: 15px 20px;
+  border-radius: 20px 20px 0 0;
+}
+.app-header .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.app-header h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 18px;
+  color: var(--gold-light);
+}
+.header-btns {
+  display: flex;
+  gap: 12px;
+}
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(200,144,66,0.15);
+  border: 1px solid rgba(200,144,66,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+.logout { background: rgba(200,144,66,0.2); }
 
-/* Navigation Tabs */
-.nav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0;}
-.nb{padding:8px 12px;background:rgba(200,144,42,0.1);border:none;border-radius:25px;color:var(--gold-l);cursor:pointer;font-size:12px;}
-.nb.on{background:rgba(200,144,42,0.3);}
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 8px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+.nav-btn {
+  padding: 8px 16px;
+  background: rgba(200,144,66,0.1);
+  border: none;
+  border-radius: 25px;
+  color: var(--gold-light);
+  cursor: pointer;
+  font-size: 13px;
+}
+.nav-btn.active {
+  background: rgba(200,144,66,0.3);
+}
 
 /* Sections */
-.sec{display:none;margin-top:20px;}
-.sec.on{display:block;}
-.slbl{font-size:11px;color:rgba(200,144,42,0.5);margin-bottom:10px;}
-.wcard{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;}
-.wcg{font-size:18px;font-weight:600;color:var(--gold-l);}
-.wcam{font-size:13px;color:var(--text-main);margin-top:5px;}
+.section { display: none; margin-top: 20px; }
+.section.active { display: block; }
+.section-title {
+  font-size: 11px;
+  color: rgba(200,144,66,0.5);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.word-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(200,144,66,0.2);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.word-card:active { transform: scale(0.98); }
+.word { font-size: 18px; font-weight: 600; color: var(--gold-light); }
+.meaning { font-size: 13px; color: var(--text); margin-top: 5px; }
+.welcome-card {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--bg-card);
+  border-radius: 20px;
+}
+.welcome-card h3 { color: var(--gold-light); margin-bottom: 12px; }
+.orn {
+  text-align: center;
+  color: var(--gold);
+  font-size: 11px;
+  opacity: 0.4;
+  margin-top: 25px;
+}
 </style>
 
-<!-- Firebase SDK -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script>
@@ -960,95 +1113,89 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
 </head>
 <body>
 
-<!-- LOGIN SCREEN - FULLSCREEN -->
-<div id="login-screen">
+<!-- LOGIN PAGE (FULLSCREEN) -->
+<div id="loginPage">
   <div class="login-container">
-    <div class="cross-icon">
+    <div class="cross">
       <svg viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2.5">
-        <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor"/>
-        <line x1="20" y1="50" x2="80" y2="50" stroke="currentColor"/>
-        <circle cx="50" cy="50" r="18" stroke="currentColor" fill="none"/>
-        <circle cx="50" cy="50" r="8" stroke="currentColor" fill="none"/>
+        <line x1="50" y1="20" x2="50" y2="80"/>
+        <line x1="20" y1="50" x2="80" y2="50"/>
+        <circle cx="50" cy="50" r="18" fill="none"/>
+        <circle cx="50" cy="50" r="8" fill="none"/>
       </svg>
     </div>
-    
     <div class="login-card">
-      <div class="login-title">ግእዝ ቋንቋ</div>
-      <div class="login-sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
-      
-      <div class="login-tabs">
-        <button class="ltab on" id="tab-in" onclick="switchTab('in')">ግባ</button>
-        <button class="ltab" id="tab-up" onclick="switchTab('up')">ተመዝገብ</button>
+      <h1>ግእዝ ቋንቋ</h1>
+      <div class="sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+      <div class="tabs">
+        <button class="tab active" id="tabLogin" onclick="setMode('login')">ግባ</button>
+        <button class="tab" id="tabRegister" onclick="setMode('register')">ተመዝገብ</button>
       </div>
-      
-      <div class="login-form">
-        <input class="linput" id="lemail" type="email" placeholder="Email አድራሻ">
-        <div class="pwd-wrapper">
-          <input class="linput" id="lpass" type="password" placeholder="የሚስጥር ቁጥር">
-          <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()">👁️</button>
-        </div>
-        <input class="linput" id="lname" type="text" placeholder="ስምህ (ለምዝገባ ብቻ)" style="display:none">
-        <button class="lbtn" id="lbtn" onclick="doAuth()">ግባ</button>
-        <div class="lerr" id="lerr"></div>
+      <input type="email" id="email" class="input" placeholder="Email አድራሻ">
+      <div class="password-wrapper">
+        <input type="password" id="password" class="input" placeholder="የሚስጥር ቁጥር">
+        <button class="toggle-pwd" onclick="togglePassword()">👁️</button>
       </div>
+      <input type="text" id="name" class="input" placeholder="ስምህ (ለምዝገባ)" style="display:none">
+      <button class="btn" id="actionBtn" onclick="handleAuth()">ግባ</button>
+      <div class="error" id="errorMsg"></div>
     </div>
-    
-    <div class="divine-message">
+    <div class="message">
       <div class="text">እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !</div>
-      <div class="sub">ምንም ነገር ለእግዚአብሔር አይከብድም</div>
+      <div class="small">ምንም ነገር ለእግዚአብሔር አይከብድም</div>
     </div>
   </div>
 </div>
 
-<!-- MAIN APP - HIDDEN UNTIL LOGIN -->
-<div id="main-app">
+<!-- MAIN APP (HIDDEN UNTIL LOGIN) -->
+<div id="mainApp">
   <div class="app-header">
-    <div class="hr">
-      <div><h1>ግእዝ ቋንቋ</h1></div>
-      <div class="header-buttons">
-        <div class="header-btn" id="dayBtn" onclick="toggleDay()">🌙</div>
-        <div class="header-btn logout-btn" onclick="signOut()">🚪</div>
+    <div class="row">
+      <h2>ግእዝ ቋንቋ</h2>
+      <div class="header-btns">
+        <div class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</div>
+        <div class="icon-btn logout" onclick="logout()">🚪</div>
       </div>
     </div>
   </div>
   
   <div class="nav">
-    <button class="nb on" onclick="showTab('home',this)">መነሻ</button>
-    <button class="nb" onclick="showTab('vocab',this)">ቃላት</button>
-    <button class="nb" onclick="showTab('about',this)">ስለኛ</button>
+    <button class="nav-btn active" onclick="showSection('home',this)">መነሻ</button>
+    <button class="nav-btn" onclick="showSection('words',this)">ቃላት</button>
+    <button class="nav-btn" onclick="showSection('about',this)">ስለኛ</button>
   </div>
   
-  <div id="home" class="sec on">
-    <div class="welcome-user">
-      <h2>እንኳን ደህና መጣህ! 🎉</h2>
-      <p id="userName">እግዚአብሔር ይባርክህ!</p>
+  <div id="home" class="section active">
+    <div class="welcome-card">
+      <h3 id="welcomeMsg">እንኳን ደህና መጣህ! 🎉</h3>
+      <p>እግዚአብሔር ይባርክህ!</p>
       <div class="orn">✦ ግእዝ ቋንቋ ይማሩ ✦</div>
     </div>
   </div>
   
-  <div id="vocab" class="sec">
-    <div class="slbl">ቃላት</div>
-    <div class="wcard" onclick="speak('እግዚአብሔር')">
-      <div class="wcg">እግዚአብሔር</div>
-      <div class="wcam">ጌታ፣ አምላክ</div>
+  <div id="words" class="section">
+    <div class="section-title">ቃላት</div>
+    <div class="word-card" onclick="speakWord('እግዚአብሔር')">
+      <div class="word">እግዚአብሔር</div>
+      <div class="meaning">ጌታ፣ አምላክ</div>
     </div>
-    <div class="wcard" onclick="speak('ማርያም')">
-      <div class="wcg">ማርያም</div>
-      <div class="wcam">ቅድስት ድንግል</div>
+    <div class="word-card" onclick="speakWord('ማርያም')">
+      <div class="word">ማርያም</div>
+      <div class="meaning">ቅድስት ድንግል</div>
     </div>
-    <div class="wcard" onclick="speak('ወንጌል')">
-      <div class="wcg">ወንጌል</div>
-      <div class="wcam">ምሥራች</div>
+    <div class="word-card" onclick="speakWord('ወንጌል')">
+      <div class="word">ወንጌል</div>
+      <div class="meaning">ምሥራች</div>
     </div>
-    <div class="wcard" onclick="speak('ሰላም')">
-      <div class="wcg">ሰላም</div>
-      <div class="wcam">ሰላምታ</div>
+    <div class="word-card" onclick="speakWord('ሰላም')">
+      <div class="word">ሰላም</div>
+      <div class="meaning">ሰላምታ</div>
     </div>
   </div>
   
-  <div id="about" class="sec">
-    <div class="welcome-user">
-      <h2>ስለ አፕሉ</h2>
+  <div id="about" class="section">
+    <div class="welcome-card">
+      <h3>ስለ አፕሉ</h3>
       <p>ይህ አፕ የግእዝ ቋንቋን ለማስተማር ተዘጋጅቷል።</p>
       <div class="orn">✦ እግዚአብሔር ይባርክህ ✦</div>
     </div>
@@ -1056,131 +1203,59 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
 </div>
 
 <script>
-// ======================== GLOBAL ========================
-let loginMode = 'in';
-let isDay = false;
+// ========== GLOBALS ==========
+let isLoginMode = true;
+let isDark = true;
 let isSoundOn = true;
-let amVoice = null;
+let synth = window.speechSynthesis;
+let voice = null;
+
 const auth = firebase.auth();
 
-// ======================== VOICE ========================
-function loadVoices() {
-  const voices = speechSynthesis.getVoices();
-  amVoice = voices.find(v => v.lang === 'am-ET' || v.lang === 'am');
+// ========== VOICE ==========
+function loadVoice() {
+  const voices = synth.getVoices();
+  voice = voices.find(v => v.lang === 'am-ET' || v.lang === 'am');
 }
-if ('speechSynthesis' in window) {
-  speechSynthesis.onvoiceschanged = loadVoices;
-  loadVoices();
-}
+synth.onvoiceschanged = loadVoice;
+loadVoice();
 
-function speak(word) {
+function speakWord(word) {
   if (!isSoundOn) return;
-  if ('speechSynthesis' in window) {
-    speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'am-ET';
-    utterance.rate = 0.7;
-    if (amVoice) utterance.voice = amVoice;
-    speechSynthesis.speak(utterance);
-  }
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'am-ET';
+  utterance.rate = 0.7;
+  if (voice) utterance.voice = voice;
+  synth.speak(utterance);
 }
 
-// ======================== DAY/NIGHT ========================
-function toggleDay() {
-  isDay = !isDay;
-  document.body.classList.toggle('day', isDay);
-  const btn = document.getElementById('dayBtn');
-  if (btn) btn.textContent = isDay ? '☀️' : '🌙';
+// ========== THEME ==========
+function toggleTheme() {
+  isDark = !isDark;
+  const bg = isDark ? '#0a0400' : '#f5f0e8';
+  const text = isDark ? '#f0e0c0' : '#2c241a';
+  document.body.style.background = bg;
+  document.body.style.color = text;
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
 }
 
-// ======================== TAB NAVIGATION ========================
-function showTab(tabId, btn) {
-  document.querySelectorAll('.sec').forEach(sec => sec.classList.remove('on'));
-  document.getElementById(tabId).classList.add('on');
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
-  if (btn) btn.classList.add('on');
+// ========== AUTH UI ==========
+function setMode(mode) {
+  isLoginMode = (mode === 'login');
+  const loginTab = document.getElementById('tabLogin');
+  const regTab = document.getElementById('tabRegister');
+  const nameField = document.getElementById('name');
+  const actionBtn = document.getElementById('actionBtn');
+  
+  loginTab.classList.toggle('active', isLoginMode);
+  regTab.classList.toggle('active', !isLoginMode);
+  nameField.style.display = isLoginMode ? 'none' : 'block';
+  actionBtn.textContent = isLoginMode ? 'ግባ' : 'ተመዝገብ';
+  document.getElementById('errorMsg').textContent = '';
 }
 
-// ======================== FIREBASE AUTH ========================
-auth.onAuthStateChanged(user => {
-  const loginScreen = document.getElementById('login-screen');
-  const mainApp = document.getElementById('main-app');
-  
-  if (user) {
-    // Hide login screen completely
-    loginScreen.style.display = 'none';
-    // Show main app
-    mainApp.style.display = 'block';
-    const userName = document.getElementById('userName');
-    if (userName) {
-      userName.innerHTML = `እንኳን ደህና መጣህ፣ ${user.email?.split('@')[0] || 'ተጠቃሚ'}! 🙏`;
-    }
-    if (isSoundOn) speak('እንኳን ደህና መጣህ');
-  } else {
-    // Show login screen
-    loginScreen.style.display = 'flex';
-    // Hide main app
-    mainApp.style.display = 'none';
-    resetLoginForm();
-  }
-});
-
-function switchTab(mode) {
-  loginMode = mode;
-  const tabIn = document.getElementById('tab-in');
-  const tabUp = document.getElementById('tab-up');
-  const lbtn = document.getElementById('lbtn');
-  const lname = document.getElementById('lname');
-  const lerr = document.getElementById('lerr');
-  
-  if (tabIn) tabIn.classList.toggle('on', mode === 'in');
-  if (tabUp) tabUp.classList.toggle('on', mode === 'up');
-  if (lbtn) lbtn.textContent = mode === 'in' ? 'ግባ' : 'ተመዝገብ';
-  if (lname) lname.style.display = mode === 'up' ? 'block' : 'none';
-  if (lerr) lerr.textContent = '';
-}
-
-function doAuth() {
-  const email = document.getElementById('lemail').value.trim();
-  const pass = document.getElementById('lpass').value;
-  const name = document.getElementById('lname').value.trim();
-  const err = document.getElementById('lerr');
-  
-  if (!email || !pass) {
-    err.textContent = 'Email እና password ያስፈልጋል!';
-    if (isSoundOn) speak('እባክዎ ኢሜይል እና የይለፍ ቃል ያስገቡ');
-    return;
-  }
-  
-  const btn = document.getElementById('lbtn');
-  btn.textContent = '...';
-  
-  if (loginMode === 'in') {
-    auth.signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        if (isSoundOn) speak('ገብተሃል እንኳን ደህና መጣህ');
-      })
-      .catch(e => {
-        err.textContent = e.message;
-        btn.textContent = 'ግባ';
-        if (isSoundOn) speak('ስህተት ተፈጥሯል');
-      });
-  } else {
-    auth.createUserWithEmailAndPassword(email, pass)
-      .then((userCred) => {
-        if (name) userCred.user.updateProfile({ displayName: name });
-        if (isSoundOn) speak('አካውንት ተፈጥሯል እንኳን ደህና መጣህ');
-      })
-      .catch(e => {
-        err.textContent = e.message;
-        btn.textContent = 'ተመዝገብ';
-        if (isSoundOn) speak('ስህተት ተፈጥሯል');
-      });
-  }
-}
-
-function togglePasswordVisibility() {
-  const pwd = document.getElementById('lpass');
+function togglePassword() {
+  const pwd = document.getElementById('password');
   const btn = document.querySelector('.toggle-pwd');
   if (pwd.type === 'password') {
     pwd.type = 'text';
@@ -1191,25 +1266,84 @@ function togglePasswordVisibility() {
   }
 }
 
-function resetLoginForm() {
-  const lemail = document.getElementById('lemail');
-  const lpass = document.getElementById('lpass');
-  const lname = document.getElementById('lname');
-  const lerr = document.getElementById('lerr');
+function handleAuth() {
+  const email = document.getElementById('email').value.trim();
+  const pass = document.getElementById('password').value;
+  const name = document.getElementById('name').value.trim();
+  const errorDiv = document.getElementById('errorMsg');
   
-  if (lemail) lemail.value = '';
-  if (lpass) lpass.value = '';
-  if (lname) lname.value = '';
-  if (lerr) lerr.textContent = '';
+  if (!email || !pass) {
+    errorDiv.textContent = 'Email እና password ያስፈልጋል!';
+    return;
+  }
+  
+  const btn = document.getElementById('actionBtn');
+  btn.textContent = '...';
+  
+  if (isLoginMode) {
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(() => {})
+      .catch(e => {
+        errorDiv.textContent = e.message;
+        btn.textContent = 'ግባ';
+      });
+  } else {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((userCred) => {
+        if (name) userCred.user.updateProfile({ displayName: name });
+      })
+      .catch(e => {
+        errorDiv.textContent = e.message;
+        btn.textContent = 'ተመዝገብ';
+      });
+  }
 }
 
-function signOut() {
+function logout() {
   auth.signOut();
-  if (isSoundOn) speak('ዘግተሃል');
 }
 
-// Initialize login screen visibility
-document.getElementById('login-screen').style.display = 'flex';
+// ========== AUTH STATE ==========
+auth.onAuthStateChanged(user => {
+  const loginPage = document.getElementById('loginPage');
+  const mainApp = document.getElementById('mainApp');
+  
+  if (user) {
+    // User is logged in - hide login, show main app
+    loginPage.style.display = 'none';
+    mainApp.style.display = 'block';
+    const emailName = user.email?.split('@')[0] || 'ተጠቃሚ';
+    document.getElementById('welcomeMsg').innerHTML = `እንኳን ደህና መጣህ፣ ${emailName}! 🎉`;
+    if (isSoundOn) speakWord('እንኳን ደህና መጣህ');
+  } else {
+    // User is logged out - show login, hide main app
+    loginPage.style.display = 'flex';
+    mainApp.style.display = 'none';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('name').value = '';
+    document.getElementById('errorMsg').textContent = '';
+  }
+});
+
+// ========== SECTION NAVIGATION ==========
+function showSection(sectionId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// ========== SOUND TOGGLE ==========
+// Add sound toggle to header (optional)
+const soundBtn = document.createElement('div');
+soundBtn.className = 'icon-btn';
+soundBtn.textContent = '🔊';
+soundBtn.onclick = () => {
+  isSoundOn = !isSoundOn;
+  soundBtn.textContent = isSoundOn ? '🔊' : '🔇';
+};
+document.querySelector('.header-btns').insertBefore(soundBtn, document.querySelector('.logout'));
 </script>
 </body>
 </html>
