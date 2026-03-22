@@ -203,30 +203,35 @@ body.day .nb.on{color:#8b4500;border-bottom-color:#8b4500;}
 .orn{text-align:center;color:var(--gold);font-size:12px;opacity:0.3;margin:12px 0;}
 </style>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<!-- Firebase is temporarily disabled for testing -->
 <script>
-firebase.initializeApp({
-  apiKey: "AIzaSyAcH6IWpeXq3YemyisYZtAdt2DoRSgAP38",
-  authDomain: "geezapp-ff6e0.firebaseapp.com",
-  projectId: "geezapp-ff6e0",
-  storageBucket: "geezapp-ff6e0.firebasestorage.app",
-  messagingSenderId: "713013615315",
-  appId: "1:713013615315:web:42cfb7e7157351b8249226"
-});
+  // Mock Firebase auth for testing - always show main app
+  window.firebase = {
+    auth: () => ({
+      onAuthStateChanged: (callback) => {
+        // Immediately return a mock user
+        callback({ email: "test@geez.com", displayName: "ዲያቆን" });
+      },
+      signInWithEmailAndPassword: () => Promise.resolve(),
+      createUserWithEmailAndPassword: () => Promise.resolve(),
+      signOut: () => Promise.resolve()
+    })
+  };
+  
+  // Override to always hide login screen
+  setTimeout(() => {
+    const loginWrap = document.getElementById('login-wrap');
+    if (loginWrap) loginWrap.classList.add('hide');
+    const ss = document.getElementById('ss');
+    if (ss) ss.textContent = 'ተፈታኝ';
+  }, 100);
 </script>
 
-<!-- OneSignal -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<!-- OneSignal temporarily disabled -->
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({ appId: "64c012b0-516f-4f8f-92a7-110472bc180a" });
-  });
+  window.OneSignalDeferred.push = function(fn) { fn({}); };
 </script>
-</head>
-<body>
 
 <!-- LOGIN SCREEN -->
 <div id="login-wrap">
