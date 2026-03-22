@@ -706,7 +706,117 @@ document.querySelectorAll('.wcard, .pcard').forEach(card => {
     }
   }
 });
+// ======================== YOUR VOICE AUDIO FILES ========================
+// Place your voice audio files in the same folder as index.html
+// File names must match exactly as below (case sensitive)
 
+const audioFiles = {
+  // Religious Terms
+  "እግዚአብሔር": "እግዚአብሔር.mp3",
+  "ክርስቶስ": "ክርስቶስ.mp3",
+  "ማርያም": "ማርያም.mp3",
+  "ወንጌል": "ወንጌል.mp3",
+  "ጸሎት": "ጸሎት.mp3",
+  "ቅዱስ": "ቅዱስ.mp3",
+  "ሃይማኖት": "ሃይማኖት.mp3",
+  "ምናምን": "ምናምን.mp3",
+  "ጸጋ": "ጸጋ.mp3",
+  
+  // Body Parts
+  "ርእስ": "ርእስ.mp3",
+  "ዐይን": "ዐይን.mp3",
+  "እድ": "እድ.mp3",
+  "እግር": "እግር.mp3",
+  "ልብ": "ልብ.mp3",
+  "ልሣን": "ልሣን.mp3",
+  "አፍ": "አፍ.mp3",
+  "ስእርት": "ስእርት.mp3",
+  "ገጽ": "ገጽ.mp3",
+  "ዘባን": "ዘባን.mp3",
+  "ብረክ": "ብረክ.mp3",
+  
+  // Verbs
+  "ፈቀደ": "ፈቀደ.mp3",
+  "አምነ": "አምነ.mp3",
+  "ገብረ": "ገብረ.mp3",
+  "ቀተለ": "ቀተለ.mp3",
+  "ባረከ": "ባረከ.mp3",
+  "ሰከበ": "ሰከበ.mp3",
+  "ወሀበ": "ወሀበ.mp3",
+  "ሖረ": "ሖረ.mp3",
+  "ናሁ": "ናሁ.mp3",
+  
+  // Nature
+  "ሰማይ": "ሰማይ.mp3",
+  "ምድር": "ምድር.mp3",
+  "ብርሃን": "ብርሃን.mp3",
+  "ጽልመት": "ጽልመት.mp3",
+  "ውኃ": "ውኃ.mp3",
+  "እሳት": "እሳት.mp3",
+  
+  // Greetings
+  "ሰላም": "ሰላም.mp3",
+  "ሰላም ለከ": "ሰላም ለከ.mp3",
+  "ሰላም ለኪ": "ሰላም ለኪ.mp3",
+  "አሜን": "አሜን.mp3",
+  "እግዚኦ ተሣሃለነ": "እግዚኦ ተሣሃለነ.mp3",
+  
+  // Question Words
+  "ምንት": "ምንት.mp3",
+  "መኑ": "መኑ.mp3",
+  "አይ": "አይ.mp3",
+  "አምጣ": "አምጣ.mp3",
+  "ከመ": "ከመ.mp3",
+  "እምቦ": "እምቦ.mp3",
+  
+  // Proverbs
+  "ዘለንዙ ወርቀ ወዘሌለንዙ": "ዘለንዙ ወርቀ ወዘሌለንዙ.mp3",
+  "ኢይከብር ነቢይ በሀገሩ": "ኢይከብር ነቢይ በሀገሩ.mp3",
+  "ሰብእ ይከብር በእንተ ልብሱ": "ሰብእ ይከብር በእንተ ልብሱ.mp3",
+  "አልቦ ገብር ዘይክል ተቀንዮ ለክልዔ አጋእዝት": "አልቦ ገብር ዘይክል ተቀንዮ ለክልዔ አጋእዝት.mp3"
+};
+
+// Updated playAudio function to use YOUR voice files
+function playAudio(word) {
+  if(!sOn) return false;
+  const filename = audioFiles[word];
+  if(filename){
+    const audio = new Audio(filename);
+    audio.play().catch(e => console.log("Audio file not found:", filename));
+    return true;
+  }
+  return false;
+}
+
+// Updated spk function - priority: your audio files first, then TTS
+function spk(t, card) {
+  if(!sOn) return;
+  
+  // Animate the play button if exists
+  if(card) { 
+    const ab = card.querySelector('.ab,.pcab'); 
+    if(ab) { 
+      const ot = ab.textContent; 
+      ab.textContent='♪'; 
+      setTimeout(() => ab.textContent=ot, 800);
+    } 
+  }
+  
+  // Stop any playing audio
+  if(aud && !aud.paused) aud.pause();
+  
+  // Try to play your voice recording first
+  if(playAudio(t)) return;
+  
+  // If your voice file not found, use TTS as fallback
+  if(!'speechSynthesis' in window) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = 'am-ET';
+  u.rate = 0.7;
+  if(amVoice) u.voice = amVoice;
+  speechSynthesis.speak(u);
+}
 // ======================== SPLASH ========================
 setTimeout(()=>{
   const sp = document.getElementById('sp');
