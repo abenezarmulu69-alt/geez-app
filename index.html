@@ -849,8 +849,20 @@ body.day{
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--parch);min-height:100vh;transition:background 0.3s;}
 
-/* Login Container */
-.login-container{max-width:400px;width:100%;margin:0 auto;padding:20px;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);}
+/* Login Screen - Full screen, centered */
+#login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.login-container{max-width:400px;width:90%;margin:0 auto;}
 
 /* Cross Animation */
 .cross-icon{width:70px;height:70px;margin:0 auto 20px;background:radial-gradient(circle,rgba(200,144,42,0.3),transparent);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s ease-in-out infinite;}
@@ -876,8 +888,35 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
 .lbtn:active{transform:scale(0.98);}
 .lerr{font-size:12px;color:#ef9a9a;text-align:center;min-height:40px;margin-top:12px;}
 
-/* Main App (after login) */
-#main-app{display:none;max-width:500px;width:100%;margin:0 auto;padding:20px;}
+/* Divine Message */
+.divine-message {
+  background: linear-gradient(135deg, rgba(200,144,42,0.1), rgba(200,144,42,0.02));
+  border-left: 3px solid var(--gold);
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+.divine-message .text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+.divine-message .sub {
+  font-size: 10px;
+  color: rgba(200,144,42,0.6);
+  margin-top: 5px;
+}
+
+/* Main App - Hidden by default */
+#main-app {
+  display: none;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
 .app-header{background:linear-gradient(180deg,#1c0c00 0%,var(--bg) 100%);padding:15px 20px;border-radius:20px 20px 0 0;}
 .app-header .hr{display:flex;justify-content:space-between;align-items:center;}
 .app-header h1{font-family:'Cinzel Decorative',serif;font-size:20px;color:var(--gold-l);}
@@ -890,16 +929,18 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
 .welcome-user p{color:var(--text-sub);}
 .orn{text-align:center;color:var(--gold);font-size:12px;opacity:0.5;margin-top:30px;}
 
-/* Sections for main app content */
+/* Navigation Tabs */
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0;}
+.nb{padding:8px 12px;background:rgba(200,144,42,0.1);border:none;border-radius:25px;color:var(--gold-l);cursor:pointer;font-size:12px;}
+.nb.on{background:rgba(200,144,42,0.3);}
+
+/* Sections */
 .sec{display:none;margin-top:20px;}
 .sec.on{display:block;}
 .slbl{font-size:11px;color:rgba(200,144,42,0.5);margin-bottom:10px;}
 .wcard{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;}
 .wcg{font-size:18px;font-weight:600;color:var(--gold-l);}
 .wcam{font-size:13px;color:var(--text-main);margin-top:5px;}
-.nav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0;}
-.nb{padding:8px 12px;background:rgba(200,144,42,0.1);border:none;border-radius:25px;color:var(--gold-l);cursor:pointer;font-size:12px;}
-.nb.on{background:rgba(200,144,42,0.3);}
 </style>
 
 <!-- Firebase SDK -->
@@ -919,7 +960,7 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN SCREEN - FULLSCREEN -->
 <div id="login-screen">
   <div class="login-container">
     <div class="cross-icon">
@@ -951,10 +992,15 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
         <div class="lerr" id="lerr"></div>
       </div>
     </div>
+    
+    <div class="divine-message">
+      <div class="text">እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !</div>
+      <div class="sub">ምንም ነገር ለእግዚአብሔር አይከብድም</div>
+    </div>
   </div>
 </div>
 
-<!-- MAIN APP (after login) -->
+<!-- MAIN APP - HIDDEN UNTIL LOGIN -->
 <div id="main-app">
   <div class="app-header">
     <div class="hr">
@@ -966,14 +1012,12 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
     </div>
   </div>
   
-  <!-- Navigation Tabs -->
   <div class="nav">
-    <button class="nb on" onclick="showTab('home')">መነሻ</button>
-    <button class="nb" onclick="showTab('vocab')">ቃላት</button>
-    <button class="nb" onclick="showTab('about')">ስለኛ</button>
+    <button class="nb on" onclick="showTab('home',this)">መነሻ</button>
+    <button class="nb" onclick="showTab('vocab',this)">ቃላት</button>
+    <button class="nb" onclick="showTab('about',this)">ስለኛ</button>
   </div>
   
-  <!-- Home Section -->
   <div id="home" class="sec on">
     <div class="welcome-user">
       <h2>እንኳን ደህና መጣህ! 🎉</h2>
@@ -982,7 +1026,6 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
     </div>
   </div>
   
-  <!-- Vocabulary Section -->
   <div id="vocab" class="sec">
     <div class="slbl">ቃላት</div>
     <div class="wcard" onclick="speak('እግዚአብሔር')">
@@ -1003,7 +1046,6 @@ body{background:var(--bg);font-family:'Noto Serif Ethiopic',serif;color:var(--pa
     </div>
   </div>
   
-  <!-- About Section -->
   <div id="about" class="sec">
     <div class="welcome-user">
       <h2>ስለ አፕሉ</h2>
@@ -1052,11 +1094,11 @@ function toggleDay() {
 }
 
 // ======================== TAB NAVIGATION ========================
-function showTab(tabId) {
+function showTab(tabId, btn) {
   document.querySelectorAll('.sec').forEach(sec => sec.classList.remove('on'));
   document.getElementById(tabId).classList.add('on');
-  document.querySelectorAll('.nb').forEach(btn => btn.classList.remove('on'));
-  event.target.classList.add('on');
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
 }
 
 // ======================== FIREBASE AUTH ========================
@@ -1065,16 +1107,19 @@ auth.onAuthStateChanged(user => {
   const mainApp = document.getElementById('main-app');
   
   if (user) {
+    // Hide login screen completely
     loginScreen.style.display = 'none';
+    // Show main app
     mainApp.style.display = 'block';
     const userName = document.getElementById('userName');
     if (userName) {
       userName.innerHTML = `እንኳን ደህና መጣህ፣ ${user.email?.split('@')[0] || 'ተጠቃሚ'}! 🙏`;
     }
-    // Welcome sound
     if (isSoundOn) speak('እንኳን ደህና መጣህ');
   } else {
+    // Show login screen
     loginScreen.style.display = 'flex';
+    // Hide main app
     mainApp.style.display = 'none';
     resetLoginForm();
   }
@@ -1163,11 +1208,8 @@ function signOut() {
   if (isSoundOn) speak('ዘግተሃል');
 }
 
-// Fix login screen positioning
+// Initialize login screen visibility
 document.getElementById('login-screen').style.display = 'flex';
-document.getElementById('login-screen').style.alignItems = 'center';
-document.getElementById('login-screen').style.justifyContent = 'center';
-document.getElementById('login-screen').style.minHeight = '100vh';
 </script>
 </body>
 </html>
