@@ -692,7 +692,28 @@ function signOut(){
   playing = false;
   updBtn();
 }
-
+<!-- Firebase and OneSignal disabled for testing -->
+<script>
+  // Immediately hide login screen and show main app
+  setTimeout(() => {
+    const loginWrap = document.getElementById('login-wrap');
+    if (loginWrap) loginWrap.classList.add('hide');
+    const ss = document.getElementById('ss');
+    if (ss) ss.textContent = 'ተፈታኝ';
+  }, 100);
+  
+  // Mock auth for any code that might call it
+  window.firebase = {
+    auth: () => ({
+      onAuthStateChanged: (cb) => cb({ email: "test@geez.com" }),
+      signInWithEmailAndPassword: () => Promise.resolve(),
+      createUserWithEmailAndPassword: () => Promise.resolve(),
+      signOut: () => Promise.resolve()
+    })
+  };
+  
+  window.OneSignalDeferred = { push: () => {} };
+</script>
 // ======================== NOTIFICATIONS (DISABLED) ========================
 function requestNotification(){
   alert('ማሳወቂያ ለሙከራ ተጥሏል። በኋላ ይጨመራል።');
