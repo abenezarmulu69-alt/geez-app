@@ -203,7 +203,7 @@ body.day .nb.on{color:#8b4500;border-bottom-color:#8b4500;}
 .orn{text-align:center;color:var(--gold);font-size:12px;opacity:0.3;margin:12px 0;}
 </style>
 
-<!-- Firebase is temporarily disabled for testing -->
+<!-- Firebase temporarily disabled for testing -->
 <script>
   // Mock Firebase auth for testing - always show main app
   window.firebase = {
@@ -230,7 +230,13 @@ body.day .nb.on{color:#8b4500;border-bottom-color:#8b4500;}
 <!-- OneSignal temporarily disabled -->
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
-  window.OneSignalDeferred.push = function(fn) { fn({}); };
+  window.OneSignalDeferred.push = function(fn) { 
+    // Mock OneSignal
+    fn({ 
+      init: () => Promise.resolve(),
+      registerForPushNotifications: () => Promise.resolve()
+    }); 
+  };
 </script>
 
 <!-- LOGIN SCREEN -->
