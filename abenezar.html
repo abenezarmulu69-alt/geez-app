@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ግእዝ ቋንቋ</title>
+<style>
+body {
+  background: #0a0400;
+  color: #e8b84b;
+  font-family: 'Noto Serif Ethiopic', serif;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #251200, #0a0400);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #c8902a;
+}
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 24px;
+  color: #e8b84b;
+}
+p {
+  color: #f0e0c0;
+  line-height: 1.6;
+}
+button {
+  background: #c8902a;
+  color: #0a0400;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+.nav-btn {
+  background: #251200;
+  color: #e8b84b;
+  border: 1px solid #c8902a;
+  padding: 8px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.sec {
+  display: none;
+  background: rgba(37,18,0,0.8);
+  border-radius: 16px;
+  padding: 15px;
+  margin-top: 15px;
+}
+.sec.active {
+  display: block;
+}
+.word-card {
+  background: #251200;
+  border: 1px solid #c8902a;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+.word-card:active { transform: scale(0.98); }
+.geez-word { font-size: 20px; color: #e8b84b; }
+.meaning { font-size: 14px; color: #f0e0c0; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>ግእዝ ቋንቋ</h1>
+  <p>ETHIOPIAN ORTHODOX · GE'EZ</p>
+  
+  <div class="nav">
+    <button class="nav-btn" onclick="showTab('home')">መነሻ</button>
+    <button class="nav-btn" onclick="showTab('vocab')">ቃላት</button>
+    <button class="nav-btn" onclick="showTab('about')">ስለኛ</button>
+  </div>
+  
+  <div id="home" class="sec active">
+    <p>🤗 እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !</p>
+    <p>ምንም ነገር ለእግዚአብሔር አይከብድም</p>
+    <button onclick="alert('ሰላም! እግዚአብሔር ይባርክህ!')">ጠቅ አድርግ</button>
+  </div>
+  
+  <div id="vocab" class="sec">
+    <div class="word-card" onclick="speak('እግዚአብሔር')">
+      <div class="geez-word">እግዚአብሔር</div>
+      <div class="meaning">ጌታ፣ አምላክ</div>
+    </div>
+    <div class="word-card" onclick="speak('ማርያም')">
+      <div class="geez-word">ማርያም</div>
+      <div class="meaning">ቅድስት ድንግል</div>
+    </div>
+    <div class="word-card" onclick="speak('ወንጌል')">
+      <div class="geez-word">ወንጌል</div>
+      <div class="meaning">ምሥራች</div>
+    </div>
+    <div class="word-card" onclick="speak('ሰላም')">
+      <div class="geez-word">ሰላም</div>
+      <div class="meaning">ሰላምታ</div>
+    </div>
+  </div>
+  
+  <div id="about" class="sec">
+    <div style="width:100px;height:100px;border-radius:50%;background:#c8902a;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:40px;">👤</div>
+    <h3>አበነዘር ዘተዋህዶ</h3>
+    <p>ዲያቆን · Ethiopian Orthodox</p>
+    <p>ይህ አፕ ግእዝ ቋንቋን ለማስተማር ተዘጋጅቷል።</p>
+  </div>
+</div>
+
+<script>
+function showTab(tabName) {
+  document.querySelectorAll('.sec').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(tabName).classList.add('active');
+}
+
+function speak(word) {
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    let utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'am-ET';
+    utterance.rate = 0.7;
+    speechSynthesis.speak(utterance);
+  } else {
+    alert('ድምጽ ማጫወቻ አይደገፍም።');
+  }
+}
+</script>
+
+</body>
+</html>
