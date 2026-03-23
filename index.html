@@ -816,4 +816,234 @@ setTimeout(()=>{
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ግእዝ ቋንቋ - ግባ</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #0a0400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.card {
+  background: linear-gradient(135deg, #1a0c00, #0a0400);
+  border: 1px solid #c8902a;
+  border-radius: 24px;
+  padding: 40px 30px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+h1 {
+  color: #e8b84b;
+  font-size: 28px;
+  margin-bottom: 8px;
+  font-family: 'Georgia', serif;
+}
+.sub {
+  color: #c8902a;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  opacity: 0.7;
+}
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+.tab {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 30px;
+  color: #c8902a;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.tab.active {
+  background: rgba(200,144,42,0.2);
+  color: #e8b84b;
+}
+input {
+  width: 100%;
+  padding: 14px;
+  background: rgba(200,144,42,0.1);
+  border: 1px solid rgba(200,144,42,0.3);
+  border-radius: 12px;
+  color: #f0e0c0;
+  font-size: 14px;
+  margin-bottom: 15px;
+  outline: none;
+}
+input:focus {
+  border-color: #e8b84b;
+}
+.pwd-box {
+  position: relative;
+}
+.toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #c8902a;
+  font-size: 18px;
+  cursor: pointer;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #3a1e00, #251200);
+  border: 1px solid #c8902a;
+  border-radius: 12px;
+  color: #e8b84b;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:active {
+  transform: scale(0.98);
+}
+.error {
+  color: #ff8888;
+  font-size: 12px;
+  margin-top: 12px;
+  min-height: 35px;
+}
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-left: 3px solid #c8902a;
+  font-size: 13px;
+  color: #c8902a;
+}
+</style>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAcH6IWpeXq3YemyisYZtAdt2DoRSgAP38",
+    authDomain: "geezapp-ff6e0.firebaseapp.com",
+    projectId: "geezapp-ff6e0",
+    storageBucket: "geezapp-ff6e0.firebasestorage.app",
+    messagingSenderId: "713013615315",
+    appId: "1:713013615315:web:42cfb7e7157351b8249226"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+
+<div class="card">
+  <h1>ግእዝ ቋንቋ</h1>
+  <div class="sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+  
+  <div class="tabs">
+    <button class="tab active" id="btnLogin" onclick="setMode('login')">ግባ</button>
+    <button class="tab" id="btnReg" onclick="setMode('register')">ተመዝገብ</button>
+  </div>
+  
+  <input type="email" id="email" placeholder="Email አድራሻ">
+  
+  <div class="pwd-box">
+    <input type="password" id="password" placeholder="የሚስጥር ቁጥር">
+    <button class="toggle" onclick="showPassword()">👁️</button>
+  </div>
+  
+  <input type="text" id="name" placeholder="ስምህ (ለምዝገባ)" style="display:none">
+  
+  <button id="actionBtn" onclick="doAction()">ግባ</button>
+  
+  <div class="error" id="errorMsg"></div>
+  <div class="message">እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !</div>
+</div>
+
+<script>
+let isLogin = true;
+const auth = firebase.auth();
+
+function setMode(mode) {
+  isLogin = (mode === 'login');
+  document.getElementById('btnLogin').classList.toggle('active', isLogin);
+  document.getElementById('btnReg').classList.toggle('active', !isLogin);
+  document.getElementById('name').style.display = isLogin ? 'none' : 'block';
+  document.getElementById('actionBtn').innerText = isLogin ? 'ግባ' : 'ተመዝገብ';
+  document.getElementById('errorMsg').innerText = '';
+}
+
+function showPassword() {
+  let pwd = document.getElementById('password');
+  let btn = document.querySelector('.toggle');
+  if (pwd.type === 'password') {
+    pwd.type = 'text';
+    btn.innerText = '🙈';
+  } else {
+    pwd.type = 'password';
+    btn.innerText = '👁️';
+  }
+}
+
+function doAction() {
+  let email = document.getElementById('email').value.trim();
+  let pass = document.getElementById('password').value;
+  let name = document.getElementById('name').value.trim();
+  let err = document.getElementById('errorMsg');
+  
+  if (!email || !pass) {
+    err.innerText = 'Email እና password ያስፈልጋል!';
+    return;
+  }
+  
+  let btn = document.getElementById('actionBtn');
+  btn.innerText = '...';
+  
+  if (isLogin) {
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        alert('እንኳን ደህና መጣህ! 🎉');
+      })
+      .catch(e => {
+        err.innerText = e.message;
+        btn.innerText = 'ግባ';
+      });
+  } else {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((user) => {
+        if (name) user.user.updateProfile({ displayName: name });
+        alert('አካውንት ተፈጥሯል! እንኳን ደህና መጣህ! 🎉');
+      })
+      .catch(e => {
+        err.innerText = e.message;
+        btn.innerText = 'ተመዝገብ';
+      });
+  }
+}
+
+// Clear on load
+document.getElementById('email').value = '';
+document.getElementById('password').value = '';
+document.getElementById('name').value = '';
+</script>
+
+</body>
+</html>
