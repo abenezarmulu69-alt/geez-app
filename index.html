@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ግእዝ ቋንቋ | Geez Language</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --gold: #c8902a;
+  --gold-light: #e8b84b;
+  --bg: #0a0400;
+  --card-bg: linear-gradient(135deg, #251200, #0a0400);
+  --card-border: rgba(200,144,66,0.25);
+  --text: #f0e0c0;
+}
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif Ethiopic', serif;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.login-container {
+  max-width: 400px;
+  width: 100%;
+}
+.cross {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background: radial-gradient(circle, rgba(200,144,66,0.2), transparent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s ease infinite;
+}
+.cross svg { width: 45px; height: 45px; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+.login-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  padding: 35px 25px;
+  text-align: center;
+}
+.login-card h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 24px;
+  color: var(--gold-light);
+  margin-bottom: 5px;
+}
+.login-card .sub {
+  font-size: 11px;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  background: rgba(200,144,66,0.1);
+  border-radius: 50px;
+  padding: 5px;
+}
+.tab {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 40px;
+  color: rgba(200,144,66,0.6);
+  font-size: 15px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tab.active {
+  background: rgba(200,144,66,0.25);
+  color: var(--gold-light);
+}
+.input {
+  width: 100%;
+  padding: 14px;
+  background: rgba(200,144,66,0.08);
+  border: 1px solid rgba(200,144,66,0.2);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 14px;
+  outline: none;
+  font-family: inherit;
+}
+.input:focus { border-color: var(--gold); }
+.pwd-wrapper { position: relative; }
+.toggle-pwd {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #3a1e00, #251200);
+  border: 1.5px solid var(--gold);
+  border-radius: 14px;
+  color: var(--gold-light);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn:active { transform: scale(0.98); }
+.error {
+  font-size: 12px;
+  color: #ef9a9a;
+  text-align: center;
+  margin-top: 12px;
+  min-height: 40px;
+}
+.verify-msg {
+  font-size: 11px;
+  color: #90ee90;
+  text-align: center;
+  margin-top: 8px;
+}
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-left: 3px solid var(--gold);
+  font-size: 12px;
+  color: var(--gold);
+  text-align: center;
+}
+#main-app {
+  display: none;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.app-header {
+  background: linear-gradient(180deg, #1c0c00, var(--bg));
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.app-header h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 18px;
+  color: var(--gold-light);
+}
+.header-btns {
+  display: flex;
+  gap: 10px;
+}
+.lang-btn {
+  background: rgba(200,144,66,0.2);
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--gold-light);
+}
+.logout-btn {
+  background: rgba(200,144,66,0.2);
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.word-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 15px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+.word-card:active { transform: scale(0.98); }
+.word { font-size: 20px; font-weight: 600; color: var(--gold-light); }
+.meaning { font-size: 14px; color: var(--text); margin-top: 5px; }
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAanb1xTypN7kPgz5D981q9sSnue6SrpQI",
+    authDomain: "geez-language-app.firebaseapp.com",
+    projectId: "geez-language-app",
+    storageBucket: "geez-language-app.firebasestorage.app",
+    messagingSenderId: "131010600566",
+    appId: "1:131010600566:web:1ccf5ff68051a3051a8957"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+
+<div id="login-screen" class="login-container">
+  <div class="cross">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2.5">
+      <line x1="50" y1="20" x2="50" y2="80"/>
+      <line x1="20" y1="50" x2="80" y2="50"/>
+      <circle cx="50" cy="50" r="18" fill="none"/>
+      <circle cx="50" cy="50" r="8" fill="none"/>
+    </svg>
+  </div>
+  <div class="login-card">
+    <h1 id="appTitle">ግእዝ ቋንቋ</h1>
+    <div class="sub" id="appSub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+    <div class="tabs">
+      <button class="tab active" id="loginTab" onclick="setMode('login')" id="loginBtnText">ግባ</button>
+      <button class="tab" id="registerTab" onclick="setMode('register')" id="registerBtnText">ተመዝገብ</button>
+    </div>
+    <input type="email" id="email" class="input" id="emailPlaceholder" placeholder="Email አድራሻ">
+    <div class="pwd-wrapper">
+      <input type="password" id="password" class="input" id="passPlaceholder" placeholder="የሚስጥር ቁጥር">
+      <button class="toggle-pwd" onclick="togglePassword()">👁️</button>
+    </div>
+    <input type="text" id="name" class="input" id="namePlaceholder" placeholder="ስምህ (ለምዝገባ)" style="display:none">
+    <button class="btn" id="actionBtn" onclick="handleAuth()">ግባ</button>
+    <div class="error" id="errorMsg"></div>
+    <div class="verify-msg" id="verifyMsg"></div>
+  </div>
+  <div class="message" id="quoteMsg">እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !</div>
+</div>
+
+<div id="main-app">
+  <div class="app-header">
+    <h2 id="mainTitle">ግእዝ ቋንቋ</h2>
+    <div class="header-btns">
+      <div class="lang-btn" onclick="toggleLangMenu()">🌐 <span id="currentLangLabel">አማርኛ</span></div>
+      <div class="logout-btn" onclick="logout()" id="logoutText">ውጣ</div>
+    </div>
+  </div>
+  <div id="langMenu" style="display:none; margin-bottom: 10px;">
+    <div class="word-card" onclick="setLanguage('am')">🇪🇹 አማርኛ</div>
+    <div class="word-card" onclick="setLanguage('om')">🇪🇹 Oromiffa</div>
+    <div class="word-card" onclick="setLanguage('ti')">🇪🇹 ትግርኛ</div>
+  </div>
+  <div class="word-card" onclick="speakWord('እግዚአብሔር')">
+    <div class="word">እግዚአብሔር</div>
+    <div class="meaning" id="meaning1">ጌታ፣ አምላክ</div>
+  </div>
+  <div class="word-card" onclick="speakWord('ማርያም')">
+    <div class="word">ማርያም</div>
+    <div class="meaning" id="meaning2">ቅድስት ድንግል</div>
+  </div>
+  <div class="word-card" onclick="speakWord('ወንጌል')">
+    <div class="word">ወንጌል</div>
+    <div class="meaning" id="meaning3">ምሥራች</div>
+  </div>
+  <div class="word-card" onclick="speakWord('ሰላም')">
+    <div class="word">ሰላም</div>
+    <div class="meaning" id="meaning4">ሰላምታ</div>
+  </div>
+</div>
+
+<script>
+// ========== LANGUAGE TRANSLATIONS ==========
+const translations = {
+  am: {
+    appTitle: "ግእዝ ቋንቋ",
+    appSub: "ETHIOPIAN ORTHODOX · GE'EZ",
+    login: "ግባ",
+    register: "ተመዝገብ",
+    email: "Email አድራሻ",
+    password: "የሚስጥር ቁጥር",
+    name: "ስምህ (ለምዝገባ)",
+    quote: "እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !",
+    mainTitle: "ግእዝ ቋንቋ",
+    logout: "ውጣ",
+    meaning1: "ጌታ፣ አምላክ",
+    meaning2: "ቅድስት ድንግል",
+    meaning3: "ምሥራች",
+    meaning4: "ሰላምታ"
+  },
+  om: {
+    appTitle: "Afaan Geez",
+    appSub: "ETHIOPIAN ORTHODOX · GE'EZ",
+    login: "Seenu",
+    register: "Galmaa'i",
+    email: "Teessoo Imeelii",
+    password: "Jecha Iccitii",
+    name: "Maqaa kee (galmaaf)",
+    quote: "Waaqayyoof wanti tokko ulfaataa miti !",
+    mainTitle: "Afaan Geez",
+    logout: "Bahii",
+    meaning1: "Gooftaa, Waaqa",
+    meaning2: "Durbamtuu Qulqulluu",
+    meaning3: "Wangeelaa",
+    meaning4: "Nagaa"
+  },
+  ti: {
+    appTitle: "ግእዝ ቋንቋ",
+    appSub: "ETHIOPIAN ORTHODOX · GE'EZ",
+    login: "እቶ",
+    register: "ተመዝገብ",
+    email: "ኢመይል ኣድራሻ",
+    password: "ምስጢር ቁጽሪ",
+    name: "ስምካ (ንምዝገባ)",
+    quote: "ንእግዚአብሔር ዝከብዶ ዋላ ሓደ ነገር የለን !",
+    mainTitle: "ግእዝ ቋንቋ",
+    logout: "ውጻ",
+    meaning1:�ታ፣ ኣምላኽ",
+    meaning2: "ቅድስቲ ድንግል",
+    meaning3: "ወንጌል",
+    meaning4: "ሰላም"
+  }
+};
+
+let currentLang = localStorage.getItem('appLang') || 'am';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('appLang', lang);
+  updateUILanguage();
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+function toggleLangMenu() {
+  const menu = document.getElementById('langMenu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+function updateUILanguage() {
+  const t = translations[currentLang];
+  if (!t) return;
+  
+  document.getElementById('appTitle').textContent = t.appTitle;
+  document.getElementById('appSub').textContent = t.appSub;
+  document.getElementById('loginBtnText').textContent = t.login;
+  document.getElementById('registerBtnText').textContent = t.register;
+  document.getElementById('emailPlaceholder').placeholder = t.email;
+  document.getElementById('passPlaceholder').placeholder = t.password;
+  document.getElementById('namePlaceholder').placeholder = t.name;
+  document.getElementById('quoteMsg').textContent = t.quote;
+  document.getElementById('mainTitle').textContent = t.mainTitle;
+  document.getElementById('logoutText').textContent = t.logout;
+  document.getElementById('meaning1').textContent = t.meaning1;
+  document.getElementById('meaning2').textContent = t.meaning2;
+  document.getElementById('meaning3').textContent = t.meaning3;
+  document.getElementById('meaning4').textContent = t.meaning4;
+  
+  const langLabel = document.getElementById('currentLangLabel');
+  if (langLabel) {
+    if (currentLang === 'am') langLabel.textContent = 'አማርኛ';
+    else if (currentLang === 'om') langLabel.textContent = 'Oromiffa';
+    else if (currentLang === 'ti') langLabel.textContent = 'ትግርኛ';
+  }
+  
+  const actionBtn = document.getElementById('actionBtn');
+  const isLoginMode = document.getElementById('loginTab').classList.contains('active');
+  if (actionBtn) actionBtn.textContent = isLoginMode ? t.login : t.register;
+}
+
+// ========== AUTH ==========
+let isLoginMode = true;
+const auth = firebase.auth();
+let amVoice = null;
+
+function loadVoices() {
+  const voices = speechSynthesis.getVoices();
+  amVoice = voices.find(v => v.lang === 'am-ET' || v.lang === 'am');
+}
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function speakWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'am-ET';
+  utterance.rate = 0.7;
+  if (amVoice) utterance.voice = amVoice;
+  speechSynthesis.speak(utterance);
+}
+
+function setMode(mode) {
+  isLoginMode = (mode === 'login');
+  const loginTab = document.getElementById('loginTab');
+  const regTab = document.getElementById('registerTab');
+  const nameField = document.getElementById('name');
+  const actionBtn = document.getElementById('actionBtn');
+  const t = translations[currentLang];
+  
+  loginTab.classList.toggle('active', isLoginMode);
+  regTab.classList.toggle('active', !isLoginMode);
+  nameField.style.display = isLoginMode ? 'none' : 'block';
+  if (actionBtn) actionBtn.textContent = isLoginMode ? (t?.login || 'ግባ') : (t?.register || 'ተመዝገብ');
+  document.getElementById('errorMsg').textContent = '';
+  document.getElementById('verifyMsg').textContent = '';
+}
+
+function togglePassword() {
+  const pwd = document.getElementById('password');
+  const btn = document.querySelector('.toggle-pwd');
+  if (pwd.type === 'password') {
+    pwd.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    pwd.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+function handleAuth() {
+  const email = document.getElementById('email').value.trim();
+  const pass = document.getElementById('password').value;
+  const name = document.getElementById('name').value.trim();
+  const errorDiv = document.getElementById('errorMsg');
+  const verifyDiv = document.getElementById('verifyMsg');
+  const t = translations[currentLang];
+  
+  if (!email || !pass) {
+    errorDiv.textContent = t?.email + ' እና ' + t?.password + ' ያስፈልጋል!';
+    return;
+  }
+  
+  const btn = document.getElementById('actionBtn');
+  btn.textContent = '...';
+  
+  if (isLoginMode) {
+    auth.signInWithEmailAndPassword(email, pass)
+      .then((userCred) => {
+        const user = userCred.user;
+        if (!user.emailVerified) {
+          auth.signOut();
+          errorDiv.textContent = 'እባክዎ ኢሜይልዎን ያረጋግጡ!';
+          btn.textContent = t?.login || 'ግባ';
+          return;
+        }
+      })
+      .catch(e => {
+        errorDiv.textContent = e.message;
+        btn.textContent = t?.login || 'ግባ';
+      });
+  } else {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((userCred) => {
+        const user = userCred.user;
+        user.sendEmailVerification();
+        if (name) user.updateProfile({ displayName: name });
+        verifyDiv.textContent = '✓ የማረጋገጫ ኢሜይል ተልኳል!';
+        errorDiv.textContent = '';
+        btn.textContent = t?.register || 'ተመዝገብ';
+        auth.signOut();
+      })
+      .catch(e => {
+        errorDiv.textContent = e.message;
+        btn.textContent = t?.register || 'ተመዝገብ';
+      });
+  }
+}
+
+function logout() {
+  auth.signOut();
+}
+
+auth.onAuthStateChanged(user => {
+  const loginScreen = document.getElementById('login-screen');
+  const mainApp = document.getElementById('main-app');
+  
+  if (user && user.emailVerified) {
+    loginScreen.style.display = 'none';
+    mainApp.style.display = 'block';
+    if (window.speechSynthesis) speakWord('እንኳን ደህና መጣህ');
+  } else {
+    loginScreen.style.display = 'block';
+    mainApp.style.display = 'none';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('name').value = '';
+  }
+});
+
+// Initialize language on load
+updateUILanguage();
+
+// Close lang menu when clicking outside
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('langMenu');
+  const btn = document.querySelector('.lang-btn');
+  if (menu && btn && !btn.contains(e.target) && !menu.contains(e.target)) {
+    menu.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
