@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Abyssinica AI | ተርጓሚ</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #0a0400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding: 16px;
+}
+.translator-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+/* WebView Container - Only the translator part */
+.webview-wrapper {
+  background: linear-gradient(135deg, #1a0c00, #0a0400);
+  border: 1px solid rgba(200,144,66,0.3);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.webview-header {
+  background: rgba(200,144,66,0.1);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(200,144,66,0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.webview-header .icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(200,144,66,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.webview-header h3 {
+  color: #e8b84b;
+  font-size: 16px;
+  font-weight: 500;
+}
+.webview-header p {
+  color: rgba(200,144,66,0.6);
+  font-size: 11px;
+}
+.webview-frame {
+  position: relative;
+  height: 550px;
+  background: #fff;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.3s;
+}
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(200,144,66,0.2);
+  border-top-color: #c8902a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-text {
+  margin-top: 12px;
+  color: #c8902a;
+  font-size: 13px;
+}
+.error-message {
+  text-align: center;
+  padding: 30px;
+  color: #ef9a9a;
+}
+.error-message button {
+  margin-top: 15px;
+  background: #c8902a;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 25px;
+  color: #0a0400;
+  cursor: pointer;
+}
+.info {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 11px;
+  color: rgba(200,144,66,0.5);
+}
+.info a {
+  color: #e8b84b;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div class="translator-container">
+  <div class="webview-wrapper">
+    <div class="webview-header">
+      <div class="icon">🌍</div>
+      <div>
+        <h3>Abyssinica AI Translator</h3>
+        <p>አማርኛ ↔ ግእዝ | ነጻ | ትክክለኛ</p>
+      </div>
+    </div>
+    
+    <div class="webview-frame">
+      <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">⏳ Abyssinica AI እየተከፈተ ነው...</div>
+        <div class="loading-text" style="font-size: 11px; margin-top: 8px;">በዓለም ላይ ብቸኛው የግእዝ ተርጓሚ</div>
+      </div>
+      <iframe 
+        id="translatorFrame"
+        src="https://www.abyssinica.ai/translator"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  
+  <div class="info">
+    <a href="https://www.abyssinica.ai/translator" target="_blank">🔗 ሙሉ ገጽ ክፈት | Open Full Page</a>
+  </div>
+</div>
+
+<script>
+const iframe = document.getElementById('translatorFrame');
+const loadingOverlay = document.getElementById('loadingOverlay');
+
+// Hide loading when iframe loads
+iframe.addEventListener('load', function() {
+  setTimeout(() => {
+    loadingOverlay.style.opacity = '0';
+    setTimeout(() => {
+      loadingOverlay.style.display = 'none';
+    }, 300);
+  }, 800);
+});
+
+// Error handling
+iframe.addEventListener('error', function() {
+  loadingOverlay.innerHTML = `
+    <div class="error-message">
+      <div style="font-size: 48px; margin-bottom: 15px;">🌐</div>
+      <div>ገጹ መክፈት አልተቻለም</div>
+      <div style="font-size: 12px; margin-top: 10px;">እባክዎ የበይነመረብ ግንኙነትዎን ያረጋግጡ</div>
+      <button onclick="location.reload()">እንደገና ሞክር</button>
+      <button onclick="window.open('https://www.abyssinica.ai/translator', '_blank')" style="margin-left: 10px;">በብራውዘር ክፈት</button>
+    </div>
+  `;
+});
+
+// Timeout fallback
+setTimeout(() => {
+  if (loadingOverlay.style.display !== 'none') {
+    loadingOverlay.innerHTML = `
+      <div class="error-message">
+        <div style="font-size: 48px; margin-bottom: 15px;">⏰</div>
+        <div>ገጹ ለመክፈት ጊዜ ወስዷል</div>
+        <div style="font-size: 12px; margin-top: 10px;">እባክዎ እንደገና ይሞክሩ</div>
+        <button onclick="location.reload()">እንደገና ሞክር</button>
+        <button onclick="window.open('https://www.abyssinica.ai/translator', '_blank')" style="margin-left: 10px;">በብራውዘር ክፈት</button>
+      </div>
+    `;
+  }
+}, 10000);
+</script>
+
+</body>
+</html>
