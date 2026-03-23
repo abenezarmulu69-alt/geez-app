@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Abyssinica AI | ግእዝ ተርጓሚ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --gold: #c8902a;
+  --gold-l: #e8b84b;
+  --bg: #0a0400;
+  --card-bg: linear-gradient(135deg, #251200, #0a0400);
+  --card-border: rgba(200,144,66,0.25);
+  --text: #f0e0c0;
+  --text-sub: #c0b0a0;
+}
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif Ethiopic', serif;
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px;
+}
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.cross {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  background: radial-gradient(circle, rgba(200,144,66,0.2), transparent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s ease infinite;
+}
+.cross svg { width: 45px; height: 45px; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 24px;
+  color: var(--gold-l);
+  margin-bottom: 5px;
+}
+.sub {
+  font-size: 11px;
+  color: var(--gold);
+  opacity: 0.6;
+  letter-spacing: 2px;
+}
+.translator-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 25px;
+  text-align: center;
+}
+.feature-badge {
+  background: rgba(200,144,66,0.2);
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  color: var(--gold-l);
+  margin-bottom: 20px;
+}
+.language-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.lang-btn {
+  background: rgba(200,144,66,0.1);
+  border: 1px solid rgba(200,144,66,0.3);
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 14px;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: #0a0400;
+  border-color: var(--gold);
+}
+.direction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--gold);
+}
+.direction-arrow {
+  font-size: 20px;
+}
+.input-area, .output-area {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.label {
+  font-size: 12px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+textarea {
+  width: 100%;
+  padding: 15px;
+  background: rgba(200,144,66,0.08);
+  border: 1px solid rgba(200,144,66,0.25);
+  border-radius: 16px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  min-height: 120px;
+}
+textarea:focus {
+  border-color: var(--gold);
+}
+.output-box {
+  background: rgba(200,144,66,0.05);
+  border: 1px solid rgba(200,144,66,0.2);
+  border-radius: 16px;
+  padding: 15px;
+  min-height: 120px;
+  color: var(--gold-l);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #3a1e00, #251200);
+  border: 1.5px solid var(--gold);
+  border-radius: 14px;
+  color: var(--gold-l);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.2s;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), #b87c2e);
+  color: #0a0400;
+}
+.examples {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(200,144,66,0.05);
+  border-radius: 16px;
+}
+.examples-title {
+  font-size: 12px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.example-item {
+  font-size: 12px;
+  color: var(--text-sub);
+  padding: 6px 0;
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(200,144,66,0.2);
+}
+.example-item:hover {
+  color: var(--gold-l);
+}
+.info {
+  text-align: center;
+  margin-top: 20px;
+  padding: 12px;
+  border-left: 3px solid var(--gold);
+  font-size: 12px;
+  color: var(--gold);
+  background: rgba(200,144,66,0.03);
+  border-radius: 8px;
+}
+.info a {
+  color: var(--gold-l);
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="cross">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2.5">
+        <line x1="50" y1="20" x2="50" y2="80"/>
+        <line x1="20" y1="50" x2="80" y2="50"/>
+        <circle cx="50" cy="50" r="18" fill="none"/>
+        <circle cx="50" cy="50" r="8" fill="none"/>
+      </svg>
+    </div>
+    <h1>Abyssinica AI</h1>
+    <div class="sub">የግእዝ ተርጓሚ | Ge'ez Translator</div>
+  </div>
+
+  <div class="translator-card">
+    <div class="feature-badge">🌍 በዓለም ላይ ብቸኛው የግእዝ ተርጓሚ</div>
+    
+    <!-- Language Direction -->
+    <div class="direction">
+      <span id="sourceLangText" style="color: var(--gold-l);">አማርኛ</span>
+      <span class="direction-arrow">→</span>
+      <span id="targetLangText">ግእዝ</span>
+    </div>
+    
+    <!-- Input Area -->
+    <div class="input-area">
+      <div class="label">📝 ጽሑፍ ያስገቡ</div>
+      <textarea id="inputText" placeholder="አማርኛ ወይም ግእዝ ጽሑፍ ይጻፉ...&#10;&#10;ለምሳሌ: እግዚአብሔር ይባርክህ"></textarea>
+    </div>
+    
+    <!-- Buttons -->
+    <button class="btn btn-primary" onclick="translateWithAbyssinica()">🚀 Abyssinica AI ተርጉም</button>
+    <button class="btn" onclick="clearText()">🗑️ አጽዳ</button>
+    
+    <!-- Output Area -->
+    <div class="output-area" style="margin-top: 20px;">
+      <div class="label">✨ ውጤት</div>
+      <div id="outputText" class="output-box">ትርጉም እዚህ ይታያል</div>
+    </div>
+    
+    <!-- Examples -->
+    <div class="examples">
+      <div class="examples-title">📖 ምሳሌ አረፍተ ነገሮች</div>
+      <div class="example-item" onclick="setExample('እግዚአብሔር ይባርክህ')">• እግዚአብሔር ይባርክህ</div>
+      <div class="example-item" onclick="setExample('ሰላም ለከ ማርያም')">• ሰላም ለከ ማርያም</div>
+      <div class="example-item" onclick="setExample('እግዚአብሔር ታላቅ ነው')">• እግዚአብሔር ታላቅ ነው</div>
+      <div class="example-item" onclick="setExample('ማርያም ቅድስት ድንግል ናት')">• ማርያም ቅድስት ድንግል ናት</div>
+      <div class="example-item" onclick="setExample('ክርስቶስ ጌታችን ነው')">• ክርስቶስ ጌታችን ነው</div>
+    </div>
+  </div>
+  
+  <div class="info">
+    <p>✨ <strong>Abyssinica AI</strong> በዓለም ላይ ብቸኛው የግእዝ ተርጓሚ ነው።</p>
+    <p>🔗 ቀጥታ ለመጠቀም: <a href="https://www.abyssinica.ai/translator" target="_blank">www.abyssinica.ai/translator</a></p>
+    <p style="font-size: 11px; margin-top: 8px;">✅ አማርኛ ↔ ግእዝ | ግእዝ ↔ እንግሊዝኛ | ነጻ</p>
+  </div>
+</div>
+
+<script>
+// Ge'ez dictionary for fallback translation
+const geEzDictionary = {
+  "እግዚአብሔር": "እግዚአብሔር",
+  "ይባርክህ": "ይባርከካ",
+  "ሰላም": "ሰላም",
+  "ማርያም": "ማርያም",
+  "ቅድስት": "ቅድስት",
+  "ድንግል": "ድንግል",
+  "ታላቅ": "ዓቢይ",
+  "ነው": "ውእቱ",
+  "ናት": "ይእቲ",
+  "ጌታ": "ጌታ",
+  "ክርስቶስ": "ክርስቶስ",
+  "ለከ": "ለከ",
+  "ለኪ": "ለኪ",
+  "ጌታችን": "ጌታነ"
+};
+
+// Full phrase patterns
+const phrasePatterns = [
+  { am: "እግዚአብሔር ይባርክህ", gez: "እግዚአብሔር ይባርከካ" },
+  { am: "ሰላም ለከ", gez: "ሰላም ለከ" },
+  { am: "ሰላም ለኪ", gez: "ሰላም ለኪ" },
+  { am: "ሰላም ለከ ማርያም", gez: "ሰላም ለከ ማርያም" },
+  { am: "እግዚአብሔር ታላቅ ነው", gez: "እግዚአብሔር ዓቢይ ውእቱ" },
+  { am: "ማርያም ቅድስት ድንግል ናት", gez: "ማርያም ቅድስት ድንግል ይእቲ" },
+  { am: "ክርስቶስ ጌታችን ነው", gez: "ክርስቶስ ጌታነ ውእቱ" }
+];
+
+function translateWithAbyssinica() {
+  const inputText = document.getElementById('inputText').value.trim();
+  const outputDiv = document.getElementById('outputText');
+  
+  if (!inputText) {
+    outputDiv.innerHTML = 'እባክዎ ጽሑፍ ይጻፉ';
+    return;
+  }
+  
+  // First, try to open Abyssinica in a new tab
+  // This is the most reliable way to use their translator
+  const encodedText = encodeURIComponent(inputText);
+  const abyssinicaUrl = `https://www.abyssinica.ai/translator?text=${encodedText}`;
+  
+  // Show message and open in new tab
+  outputDiv.innerHTML = `📖 ወደ Abyssinica AI ተርጓሚ እየወሰድኩዎት ነው...<br><br>
+  <a href="${abyssinicaUrl}" target="_blank" style="color: var(--gold-l);">👉 እዚህ ይጫኑ ወይም በአዲስ ትር ይክፈቱ</a><br><br>
+  <span style="font-size: 12px;">ከታች ያለው ፈጣን ትርጉም ነው:</span>`;
+  
+  // Also provide quick fallback translation
+  setTimeout(() => {
+    const quickTranslation = quickTranslate(inputText);
+    outputDiv.innerHTML = `🔗 <a href="${abyssinicaUrl}" target="_blank" style="color: var(--gold-l);">Abyssinica AI ላይ ይሞክሩ</a><br><br>
+    <span style="font-size: 12px; color: var(--text-sub);">📖 ፈጣን ትርጉም:</span><br>${quickTranslation}`;
+  }, 100);
+}
+
+function quickTranslate(text) {
+  // Check full phrase patterns
+  for (let pattern of phrasePatterns) {
+    if (text === pattern.am) {
+      return pattern.gez;
+    }
+  }
+  
+  // Word by word translation
+  let result = text;
+  for (let [am, gez] of Object.entries(geEzDictionary)) {
+    result = result.replace(new RegExp(am, 'g'), gez);
+  }
+  
+  // Handle special cases
+  if (result.includes("ይባርክህ") && !result.includes("ይባርከካ")) {
+    result = result.replace("ይባርክህ", "ይባርከካ");
+  }
+  if (result.includes("ነው") && !result.includes("ውእቱ")) {
+    result = result.replace("ነው", "ውእቱ");
+  }
+  
+  return result || 'ትርጉም አልተገኘም';
+}
+
+function clearText() {
+  document.getElementById('inputText').value = '';
+  document.getElementById('outputText').innerHTML = 'ትርጉም እዚህ ይታያል';
+}
+
+function setExample(text) {
+  document.getElementById('inputText').value = text;
+  translateWithAbyssinica();
+}
+</script>
+</body>
+</html>
