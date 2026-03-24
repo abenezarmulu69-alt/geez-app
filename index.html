@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0400">
+<title>ግእዝ ቋንቋ | ፕሪሚየም አፕ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+:root {
+  --gold: #c8902a;
+  --gold-l: #e8b84b;
+  --gold-d: rgba(200,144,42,0.13);
+  --bg: #0a0400;
+  --bg2: #160800;
+  --bg3: #251200;
+  --bg4: #3a1e00;
+  --parch: #f0e0c0;
+  --card-bg: linear-gradient(135deg, rgba(37,18,0,0.92), rgba(10,4,0,0.96));
+  --card-border: rgba(200,144,42,0.18);
+  --text-main: #f0e0c0;
+  --text-sub: rgba(240,220,190,0.8);
+}
+body.day {
+  --bg: #f5f0e8;
+  --bg2: #ede5d8;
+  --bg3: #e2d5c0;
+  --bg4: #d4c4a8;
+  --parch: #2a2418;
+  --card-bg: linear-gradient(135deg, rgba(255,250,240,0.98), rgba(250,240,225,0.98));
+  --card-border: rgba(100,70,30,0.2);
+  --text-main: #2c241a;
+  --text-sub: rgba(44,36,26,0.8);
+  --gold-l: #9b6a1c;
+  --gold: #aa7a2a;
+}
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif Ethiopic', serif;
+  font-size: 16px;
+  color: var(--parch);
+  min-height: 100vh;
+  transition: background 0.4s;
+}
+#cv {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.app-container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* Splash */
+#sp {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s;
+}
+#sp.out {
+  opacity: 0;
+  pointer-events: none;
+}
+.sp-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,144,42,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sp-cw svg {
+  width: 55px;
+  height: 55px;
+}
+.sp-t {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 18px;
+  color: var(--gold-l);
+  margin-top: 15px;
+}
+.sp-s {
+  font-size: 10px;
+  color: var(--gold);
+  opacity: 0.55;
+  margin-top: 4px;
+}
+.sp-b {
+  width: 100px;
+  height: 2px;
+  background: rgba(200,144,42,0.12);
+  border-radius: 1px;
+  margin-top: 25px;
+  overflow: hidden;
+}
+.sp-bf {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-l));
+  animation: bf 2s forwards;
+  width: 0;
+}
+@keyframes bf {
+  from { width: 0; }
+  to { width: 100%; }
+}
+/* Header */
+.hdr {
+  background: linear-gradient(180deg, #1c0c00 0%, var(--bg) 100%);
+  border-bottom: 1px solid rgba(200,144,42,0.22);
+  padding: 0.6rem 1rem 0.5rem;
+  flex-shrink: 0;
+}
+body.day .hdr {
+  background: linear-gradient(180deg, #e8d4a0 0%, var(--bg) 100%);
+}
+.hr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.hl h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 14px;
+  color: var(--gold-l);
+}
+.hl p {
+  font-size: 8px;
+  color: var(--gold);
+  opacity: 0.5;
+  letter-spacing: 2px;
+}
+.hbtns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.hbtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold-d);
+  border: 1px solid rgba(200,144,42,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.logout-btn {
+  background: rgba(200,144,42,0.2);
+}
+.stats {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+.stat {
+  flex: 1;
+  background: rgba(200,144,42,0.06);
+  border: 1px solid rgba(200,144,42,0.12);
+  border-radius: 10px;
+  padding: 4px 2px;
+  text-align: center;
+}
+.sn {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-l);
+}
+.sl {
+  font-size: 9px;
+  color: var(--gold);
+  opacity: 0.6;
+}
+/* Search Bar */
+.search-container {
+  padding: 0 12px 6px 12px;
+  background: var(--bg);
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(200,144,42,0.08);
+  border: 1px solid rgba(200,144,42,0.2);
+  border-radius: 25px;
+  padding: 6px 12px;
+}
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+}
+.search-box input::placeholder {
+  color: rgba(200,144,42,0.5);
+  font-size: 12px;
+}
+.search-box button {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 16px;
+}
+.search-results {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 6px;
+  display: none;
+}
+.search-results.show {
+  display: block;
+}
+.search-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.search-word {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-l);
+}
+.search-meaning {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+/* Divine Banner */
+.divine-banner {
+  background: linear-gradient(135deg, rgba(200,144,42,0.08), rgba(200,144,42,0.01));
+  border-left: 2px solid var(--gold);
+  margin: 4px 10px 8px 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+.divine-banner .title {
+  font-size: 10px;
+  color: var(--gold-l);
+}
+.divine-banner .text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+.divine-banner .sub {
+  font-size: 9px;
+  color: rgba(200,144,42,0.6);
+}
+/* Navigation */
+.nav {
+  display: flex;
+  background: var(--bg2);
+  border-bottom: 1px solid rgba(200,144,42,0.1);
+  overflow-x: auto;
+  gap: 1px;
+  padding: 0 2px;
+  flex-shrink: 0;
+}
+.nav::-webkit-scrollbar {
+  display: none;
+}
+.nb {
+  flex-shrink: 0;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(200,144,42,0.5);
+  font-size: 12px;
+  cursor: pointer;
+}
+.nb.on {
+  color: var(--gold-l);
+  border-bottom-color: var(--gold-l);
+}
+/* Content */
+.cnt {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+.sec {
+  display: none;
+}
+.sec.on {
+  display: block;
+}
+.slbl {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(200,144,42,0.5);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.slbl::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: linear-gradient(90deg, rgba(200,144,42,0.3), transparent);
+}
+/* Cards */
+.wp {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.wp .wn {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.wi {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg3), var(--bg4));
+  border: 2px solid rgba(200,144,42,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wdisc {
+  animation: spin 8s linear infinite;
+}
+.wdisc.paused {
+  animation-play-state: paused;
+}
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+.winfo {
+  flex: 1;
+}
+.wday {
+  font-size: 10px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.wname {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-l);
+}
+.wsub {
+  font-size: 11px;
+  color: rgba(200,144,42,0.5);
+}
+.wpb {
+  height: 3px;
+  background: rgba(200,144,42,0.15);
+  border-radius: 3px;
+  margin: 8px 0 4px;
+  cursor: pointer;
+}
+.wpf {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-l));
+  border-radius: 3px;
+  width: 0;
+}
+.wtime {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(200,144,42,0.5);
+  margin-bottom: 8px;
+}
+.wctrl {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.wc {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(200,144,42,0.08);
+  border: 1px solid rgba(200,144,42,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wc.main {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--bg3), var(--bg4));
+  border: 1.5px solid var(--gold);
+}
+.wlist {
+  margin-top: 12px;
+}
+.witem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+.witem.on {
+  background: rgba(200,144,42,0.1);
+  border-color: rgba(200,144,42,0.2);
+}
+.winum {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(200,144,42,0.1);
+  border: 1px solid rgba(200,144,42,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.winum.on {
+  background: rgba(200,144,42,0.3);
+  border-color: var(--gold);
+}
+.wiinfo {
+  flex: 1;
+}
+.winame {
+  font-size: 13px;
+  font-weight: 500;
+}
+.widay {
+  font-size: 10px;
+  color: rgba(200,144,42,0.6);
+}
+.wcard, .pcard, .gc {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.wcard:active {
+  transform: scale(0.98);
+}
+.wct {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.wcg {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gold-l);
+}
+.wbdg {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 15px;
+  background: rgba(200,144,42,0.1);
+  border: 1px solid rgba(200,144,42,0.2);
+}
+.ab {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(200,144,42,0.1);
+  border: 1px solid rgba(200,144,42,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+.wclat {
+  font-size: 10px;
+  color: rgba(200,144,42,0.5);
+  margin: 3px 0 0;
+}
+.wcam {
+  font-size: 12px;
+  color: var(--text-main);
+  margin-top: 4px;
+}
+.wcen {
+  font-size: 10px;
+  color: var(--text-sub);
+  margin-top: 2px;
+  padding-left: 6px;
+  border-left: 1.5px solid rgba(200,144,42,0.3);
+}
+.pcard .pcg {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-l);
+}
+.pcard .pcam {
+  font-size: 12px;
+  color: var(--text-main);
+  margin: 3px 0;
+}
+.pcard .pcen {
+  font-size: 10px;
+  color: var(--text-sub);
+}
+.pcab {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  background: rgba(200,144,42,0.1);
+  border-radius: 15px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.gc .gch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.gc .gcn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(200,144,42,0.15);
+  border: 1px solid rgba(200,144,42,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.gc .gct {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-l);
+}
+.gc .gcb {
+  font-size: 12px;
+  color: var(--text-sub);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.exr {
+  border-left: 2px solid var(--gold);
+  padding: 4px 8px;
+  margin: 6px 0;
+  background: rgba(200,144,42,0.03);
+  border-radius: 0 6px 6px 0;
+}
+.exg {
+  font-size: 13px;
+  color: var(--gold-l);
+}
+.exa {
+  font-size: 10px;
+  color: var(--text-sub);
+}
+/* Video */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.video-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.video-thumb {
+  width: 100%;
+  height: 140px;
+  background: #000;
+  position: relative;
+}
+.video-thumb .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 20px;
+}
+.video-info {
+  padding: 8px;
+}
+.video-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-l);
+}
+.video-desc {
+  font-size: 10px;
+  color: var(--text-sub);
+}
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 4000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+.video-modal.show {
+  display: flex;
+}
+.video-modal iframe {
+  width: 100%;
+  height: 55vh;
+  border: none;
+  border-radius: 12px;
+}
+.video-modal .close-vid {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: rgba(200,144,42,0.2);
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+}
+/* Quiz */
+.qtop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.qpbar {
+  flex: 1;
+  height: 3px;
+  background: rgba(200,144,42,0.15);
+  border-radius: 3px;
+  margin: 0 8px;
+}
+.qpf {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-l));
+  border-radius: 3px;
+}
+.qcard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 12px;
+}
+.qw {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-l);
+  text-align: center;
+  margin: 6px 0;
+}
+.qhint {
+  font-size: 11px;
+  color: rgba(200,144,42,0.5);
+  text-align: center;
+}
+.qabt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px auto;
+  padding: 4px 12px;
+  background: rgba(200,144,42,0.1);
+  border-radius: 25px;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 12px;
+}
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 12px 0;
+}
+.ch {
+  padding: 8px;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.05);
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+.ch.ok {
+  background: rgba(26,92,42,0.2);
+  border-color: #4caf50;
+}
+.ch.no {
+  background: rgba(139,26,26,0.2);
+  border-color: #f44336;
+}
+.nxt {
+  width: 100%;
+  padding: 8px;
+  background: linear-gradient(135deg, var(--bg3), var(--bg2));
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  color: var(--gold-l);
+  font-size: 12px;
+  cursor: pointer;
+  display: none;
+}
+.rbox {
+  text-align: center;
+  padding: 10px;
+}
+.rsc {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold-l);
+}
+.rst {
+  font-size: 18px;
+  letter-spacing: 3px;
+  margin: 6px 0;
+}
+.rmg {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin: 8px 0;
+}
+.rbtn {
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  border-radius: 25px;
+  color: var(--gold-l);
+  cursor: pointer;
+}
+/* About */
+.about-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(200,144,42,0.5);
+  overflow: hidden;
+  margin: 0 auto 10px;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.about-info-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.about-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.about-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(200,144,42,0.1);
+  border: 1px solid rgba(200,144,42,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.orn {
+  text-align: center;
+  color: var(--gold);
+  font-size: 10px;
+  opacity: 0.3;
+  margin: 10px 0;
+}
+/* Abyssinica Translator Section */
+.translator-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 15px;
+}
+.lang-selector {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.lang-option {
+  background: rgba(200,144,42,0.15);
+  border: 1px solid rgba(200,144,42,0.3);
+  border-radius: 40px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.lang-option.active {
+  background: var(--gold);
+  color: #0a0400;
+  border-color: var(--gold);
+}
+.translate-textarea {
+  width: 100%;
+  padding: 12px;
+  background: rgba(200,144,42,0.08);
+  border: 1px solid rgba(200,144,42,0.2);
+  border-radius: 14px;
+  color: var(--text-main);
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+}
+.translate-textarea:focus {
+  border-color: var(--gold);
+}
+.translate-output {
+  background: rgba(200,144,42,0.05);
+  border: 1px solid rgba(200,144,42,0.2);
+  border-radius: 14px;
+  padding: 12px;
+  min-height: 100px;
+  color: var(--gold-l);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.translate-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 15px 0;
+}
+.translate-btn {
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #3a1e00, #251200);
+  border: 1px solid var(--gold);
+  border-radius: 40px;
+  color: var(--gold-l);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+}
+.translate-btn-primary {
+  background: linear-gradient(135deg, var(--gold), #b87c2e);
+  color: #0a0400;
+}
+.example-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.example-chip {
+  background: rgba(200,144,42,0.1);
+  border: 1px solid rgba(200,144,42,0.2);
+  border-radius: 30px;
+  padding: 5px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.abyssinica-link {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 11px;
+}
+.abyssinica-link a {
+  color: var(--gold-l);
+  text-decoration: none;
+}
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAanb1xTypN7kPgz5D981q9sSnue6SrpQI",
+    authDomain: "geez-language-app.firebaseapp.com",
+    projectId: "geez-language-app",
+    storageBucket: "geez-language-app.firebasestorage.app",
+    messagingSenderId: "131010600566",
+    appId: "1:131010600566:web:1ccf5ff68051a3051a8957"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+
+<div id="sp">
+  <div class="sp-ring"><div class="sp-cw"><svg width="55" height="55" viewBox="0 0 55 55"><rect x="23" y="5" width="9" height="45" rx="3" fill="#e8b84b"/><rect x="5" y="23" width="45" height="9" rx="3" fill="#e8b84b"/><circle cx="27" cy="27" r="10" fill="#0a0400"/><circle cx="27" cy="27" r="7" fill="none" stroke="#e8b84b" stroke-width="1.2"/><circle cx="27" cy="27" r="3" fill="#e8b84b"/></svg></div></div>
+  <div class="sp-t">ግእዝ ቋንቋ</div>
+  <div class="sp-s">ETHIOPIAN ORTHODOX · GE'EZ</div>
+  <div class="sp-b"><div class="sp-bf"></div></div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:1500; display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div style="max-width:380px; width:100%;">
+    <div style="background:linear-gradient(145deg,#fdf8ed,#f5e6d3); border-radius:32px; padding:35px 25px; text-align:center; box-shadow:0 25px 45px rgba(0,0,0,0.3);">
+      <div style="width:60px; height:60px; margin:0 auto 15px; background:radial-gradient(circle,rgba(200,144,66,0.2),transparent); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+        <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2.5"><line x1="50" y1="20" x2="50" y2="80"/><line x1="20" y1="50" x2="80" y2="50"/><circle cx="50" cy="50" r="18" fill="none"/><circle cx="50" cy="50" r="8" fill="none"/></svg>
+      </div>
+      <h1 style="font-family:'Cinzel Decorative',serif; font-size:24px; color:#b87c2e;">ግእዝ ቋንቋ</h1>
+      <div style="font-size:10px; color:#9b6a1c; margin-bottom:20px;">ETHIOPIAN ORTHODOX · GE'EZ</div>
+      <div style="font-size:16px; font-weight:bold; margin:10px 0; background:linear-gradient(135deg,#c8902a,#f5b81b,#c8902a); -webkit-background-clip:text; background-clip:text; color:transparent;">🇪🇹 ሰላም ለኢትዮጵያ 🕊️</div>
+      <input type="email" id="login-email" style="width:100%; padding:12px; background:rgba(200,144,66,0.1); border:1px solid rgba(200,144,66,0.3); border-radius:14px; color:#2c241a; margin-bottom:12px; outline:none;" placeholder="Email አድራሻ">
+      <input type="password" id="login-password" style="width:100%; padding:12px; background:rgba(200,144,66,0.1); border:1px solid rgba(200,144,66,0.3); border-radius:14px; color:#2c241a; margin-bottom:12px; outline:none;" placeholder="የሚስጥር ቁጥር">
+      <button onclick="login()" style="width:100%; padding:12px; background:linear-gradient(135deg,#c8902a,#e8b84b); border:none; border-radius:14px; color:#0a0400; font-weight:bold; cursor:pointer;">ግባ</button>
+      <div id="login-error" style="color:#c0392b; font-size:12px; margin-top:10px;"></div>
+      <div style="margin-top:15px; font-size:11px;">አዲስ ተጠቃሚ ከሆንክ <strong style="cursor:pointer; color:#c8902a;" onclick="showRegister()">እዚህ ተመዝገብ</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER SCREEN -->
+<div id="register-screen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:1500; align-items:center; justify-content:center; padding:20px;">
+  <div style="max-width:380px; width:100%;">
+    <div style="background:linear-gradient(145deg,#fdf8ed,#f5e6d3); border-radius:32px; padding:35px 25px; text-align:center;">
+      <h1 style="font-family:'Cinzel Decorative',serif; font-size:24px; color:#b87c2e;">ግእዝ ቋንቋ</h1>
+      <div style="font-size:10px; color:#9b6a1c; margin-bottom:20px;">ETHIOPIAN ORTHODOX · GE'EZ</div>
+      <div style="font-size:16px; font-weight:bold; margin:10px 0; background:linear-gradient(135deg,#c8902a,#f5b81b,#c8902a); -webkit-background-clip:text; background-clip:text; color:transparent;">🇪🇹 ሰላም ለኢትዮጵያ 🕊️</div>
+      <input type="email" id="reg-email" style="width:100%; padding:12px; background:rgba(200,144,66,0.1); border:1px solid rgba(200,144,66,0.3); border-radius:14px; color:#2c241a; margin-bottom:12px; outline:none;" placeholder="Email አድራሻ">
+      <input type="text" id="reg-name" style="width:100%; padding:12px; background:rgba(200,144,66,0.1); border:1px solid rgba(200,144,66,0.3); border-radius:14px; color:#2c241a; margin-bottom:12px; outline:none;" placeholder="ስምህ">
+      <input type="password" id="reg-password" style="width:100%; padding:12px; background:rgba(200,144,66,0.1); border:1px solid rgba(200,144,66,0.3); border-radius:14px; color:#2c241a; margin-bottom:12px; outline:none;" placeholder="የሚስጥር ቁጥር">
+      <button onclick="register()" style="width:100%; padding:12px; background:linear-gradient(135deg,#c8902a,#e8b84b); border:none; border-radius:14px; color:#0a0400; font-weight:bold; cursor:pointer;">ተመዝገብ</button>
+      <div id="reg-error" style="color:#c0392b; font-size:12px; margin-top:10px;"></div>
+      <div style="margin-top:15px; font-size:11px;">ቀድሞ አካውንት ካለህ <strong style="cursor:pointer; color:#c8902a;" onclick="showLogin()">እዚህ ግባ</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="main-app" class="app-container" style="display:none;">
+  <div class="hdr">
+    <div class="hr">
+      <div class="hl"><h1>ግእዝ ቋንቋ</h1><p>ETHIOPIAN ORTHODOX · GE'EZ</p></div>
+      <div class="hbtns">
+        <button class="hbtn" onclick="toggleDay()">☀️</button>
+        <button class="hbtn" id="sndBtn" onclick="toggleSound()">🔊</button>
+        <button class="hbtn logout-btn" onclick="logout()">🚪</button>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="sn" id="ss">1</div><div class="sl">ቀናት</div></div>
+      <div class="stat"><div class="sn" id="ethDate">---</div><div class="sl">የኢትዮጵያ ቀን</div></div>
+      <div class="stat"><div class="sn" id="sc">0%</div><div class="sl">ውጤት</div></div>
+      <div class="stat"><div class="sn">7</div><div class="sl">ዜማዎች</div></div>
+    </div>
+  </div>
+  
+  <!-- SEARCH BAR -->
+  <div class="search-container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ፈልግ... ቃላት፣ ምሳሌዎች..." onkeyup="handleSearch(event)">
+      <button onclick="clearSearch()">✖</button>
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+
+  <!-- Divine Banner -->
+  <div class="divine-banner">
+    <div class="title">🤗 ጥበበ አበው</div>
+    <div class="text">እስመ አልቦ ነገር ዘይሰአኖ ለእግዚአብሔር !</div>
+    <div class="sub">ምንም ነገር ለእግዚአብሔር አይከብድም</div>
+  </div>
+
+  <div class="nav">
+    <button class="nb on" onclick="showTab('wudase',this)">ውዳሴ</button>
+    <button class="nb" onclick="showTab('lessons',this)">ትምህርቶች</button>
+    <button class="nb" onclick="showTab('vocab',this)">ቃላት</button>
+    <button class="nb" onclick="showTab('greet',this)">ሰላምታ</button>
+    <button class="nb" onclick="showTab('quest',this)">ጥያቄ</button>
+    <button class="nb" onclick="showTab('gram',this)">ሰዋሰው</button>
+    <button class="nb" onclick="showTab('numerals',this)">ቁጥሮች</button>
+    <button class="nb" onclick="showTab('proverbs',this)">ምሳሌዎች</button>
+    <button class="nb" onclick="showTab('videos',this)">ቪዲዮ</button>
+    <button class="nb" onclick="showTab('translator',this)">🌍 ተርጓሚ</button>
+    <button class="nb" onclick="showTab('quiz',this)">ፈተና</button>
+    <button class="nb" onclick="showTab('about',this)">ስለኛ</button>
+  </div>
+
+  <div class="cnt">
+    <!-- WUDASE SECTION -->
+    <div id="wudase" class="sec on">
+      <div class="slbl">ውዳሴ ማርያም በዜማ</div>
+      <div class="wp"><div class="wn"><div class="wi"><svg class="wdisc paused" id="wdisc" width="28" height="28"><circle cx="14" cy="14" r="11" fill="none" stroke="#c8902a" stroke-width="1"/><circle cx="14" cy="14" r="3" fill="#c8902a" opacity="0.6"/></svg></div><div class="winfo"><div class="wday" id="wday">ዘሰንበተ ክርስቲያን</div><div class="wname" id="wname">ውዳሴ ማርያም — ቅድስት</div><div class="wsub" id="wsub">፩ኛ · ሰንበተ ክርስቲያን</div></div></div><div class="wpb" onclick="seekA(event)" id="wpbg"><div class="wpf" id="wpf"></div></div><div class="wtime"><span id="wcur">0:00</span><span id="wdur">--:--</span></div><div class="wctrl"><button class="wc" onclick="prevT()">◀◀</button><button class="wc" onclick="rwnd()">◀</button><button class="wc main" id="pbtn" onclick="togglePlay()">▶</button><button class="wc" onclick="fwd()">▶</button><button class="wc" onclick="nextT()">▶▶</button></div></div>
+      <div class="slbl">የዜማ ዝርዝር</div>
+      <div class="wlist" id="wlist"></div>
+    </div>
+
+    <!-- LESSONS SECTION -->
+    <div id="lessons" class="sec">
+      <div class="slbl">ትምህርቶች</div>
+      <div class="gc"><div class="gch"><div class="gcn">፩</div><div class="gct">መራሕያን ተውሳጠ ስሞች (Pronouns)</div></div><div class="gcb">አነ (እኔ)፣ አንተ (አንተ)፣ አንቲ (አንቺ)፣ ውእቱ (እሱ)፣ ይእቲ (እሷ)፣ ንሕነ (እኛ)፣ አንትሙ (እናንተ-ወንድ)፣ አንትን (እናንተ-ሴት)፣ ውእቶሙ (እነሱ-ወንድ)፣ ውእቶን (እነሱ-ሴት)</div></div>
+      <div class="gc"><div class="gch"><div class="gcn">፪</div><div class="gct">ነባር አንቀጽ (Verb to be)</div></div><div class="gcb">ለቱ = ነው/ነበር፣ ደቲ = ናት/ነበረች፣ ቤቸሙ = ናቸው/ነበሩ</div></div>
+      <div class="orn">✦ ከመይትረክብ ዘትፈቅዱ ✦</div>
+    </div>
+
+    <!-- VOCAB SECTION -->
+    <div id="vocab" class="sec">
+      <div class="slbl">ቃላት (ግእዝ - አማርኛ)</div>
+      <div class="wcard" data-word="እግዚአብሔር" data-meaning="ጌታ፣ አምላክ"><div class="wct"><div><div class="wcg">እግዚአብሔር</div><div class="wclat">ʾEgziʾabḥēr</div></div><div class="wcr"><span class="wbdg">ስም</span><div class="ab">▶</div></div></div><div class="wcam">ጌታ፣ አምላክ</div><div class="wcen">God, Lord</div></div>
+      <div class="wcard" data-word="ማርያም" data-meaning="ቅድስት ድንግል"><div class="wct"><div><div class="wcg">ማርያም</div><div class="wclat">Māryām</div></div><div class="wcr"><span class="wbdg">ስም</span><div class="ab">▶</div></div></div><div class="wcam">ቅድስት ድንግል ማርያም</div><div class="wcen">Virgin Mary</div></div>
+      <div class="wcard" data-word="ወንጌል" data-meaning="ምሥራች"><div class="wct"><div><div class="wcg">ወንጌል</div><div class="wclat">Wengel</div></div><div class="wcr"><span class="wbdg">ስም</span><div class="ab">▶</div></div></div><div class="wcam">ወንጌል፣ ምሥራች</div><div class="wcen">Gospel</div></div>
+      <div class="wcard" data-word="ሰላም" data-meaning="ሰላምታ"><div class="wct"><div><div class="wcg">ሰላም</div><div class="wclat">Sälam</div></div><div class="wcr"><span class="wbdg">ስም</span><div class="ab">▶</div></div></div><div class="wcam">ሰላምታ</div><div class="wcen">Peace, Hello</div></div>
+      <div class="orn">✦ ቃላት በየጊዜው ይጨመራሉ ✦</div>
+    </div>
+
+    <!-- GREET SECTION -->
+    <div id="greet" class="sec">
+      <div class="slbl">ሰላምታ አሰጣጥ</div>
+      <div class="pcard" data-word="ሰላም" data-meaning="ሰላም — ሰላምታ"><div class="pcg">ሰላም</div><div class="pcam">ሰላም — ሰላምታ</div><div class="pcen">Peace / Hello</div><div class="pcab">▶ ድምጽ</div></div>
+      <div class="orn">✦ ሰላም ለከ ማርያም ✦</div>
+    </div>
+
+    <!-- QUEST SECTION -->
+    <div id="quest" class="sec">
+      <div class="slbl">መጠይቃዊ ቃላቶች</div>
+      <div class="pcard" data-word="ምንት" data-meaning="ምን? ምንድን ነው?"><div class="pcg">ምንት</div><div class="pcam">ምን? ምንድን ነው?</div><div class="pcen">What?</div><div class="pcab">▶ ድምጽ</div></div>
+      <div class="orn">✦ ✦ ✦</div>
+    </div>
+
+    <!-- GRAMMAR SECTION -->
+    <div id="gram" class="sec">
+      <div class="slbl">ሰዋሰው ደንቦች</div>
+      <div class="gc"><div class="gch"><div class="gcn">፩</div><div class="gct">ብዙ ቁጥር (Plural)</div></div><div class="gcb">"-አን" ለሰዎች፣ "-አት" ለነገሮች</div></div>
+      <div class="orn">✦ እግዚኦ ተሣሃለነ ✦</div>
+    </div>
+
+    <!-- NUMERALS SECTION -->
+    <div id="numerals" class="sec">
+      <div class="slbl">ቁጽሪ ግእዝ</div>
+      <div class="gc"><div class="gch"><div class="gcn">፩</div><div class="gct">አሐዱ</div></div><div class="gcb">1</div></div>
+      <div class="orn">✦ ፈትኑ! ✦</div>
+    </div>
+
+    <!-- PROVERBS SECTION -->
+    <div id="proverbs" class="sec">
+      <div class="slbl">ምሳሌያዊ አነጋገሮች</div>
+      <div class="pcard" data-word="ዘለንዙ ወርቀ ወዘሌለንዙ" data-meaning="ወርቅ የያዙትም ያልያዙትም አዘኑ"><div class="pcg">ዘለንዙ ወርቀ ወዘሌለንዙ</div><div class="pcam">ወርቅ የያዙትም ያልያዙትም አዘኑ</div><div class="pcen">Both who have gold and who don't grieved</div><div class="pcab">▶ ድምጽ</div></div>
+      <div class="orn">✦ እንጋረ ምሳሌ ዘግእዝ ✦</div>
+    </div>
+
+    <!-- VIDEOS SECTION -->
+    <div id="videos" class="sec">
+      <div class="slbl">ማስተማርያ ቪዲዮዎች</div>
+      <div class="video-grid" id="videoGrid"></div>
+      <div class="orn">✦ በቅርቡ አዳዲስ ቪዲዮዎች ይጨመራሉ ✦</div>
+    </div>
+
+    <!-- ABYSSINICA TRANSLATOR SECTION -->
+    <div id="translator" class="sec">
+      <div class="slbl">🌍 Abyssinica AI ተርጓሚ</div>
+      <div class="translator-card">
+        <div class="lang-selector">
+          <div class="lang-option active" id="sourceAm" onclick="setSourceLang('am')">አማርኛ</div>
+          <div class="lang-option" id="targetGez" onclick="setTargetLang('gez')">ግእዝ</div>
+        </div>
+        <textarea id="translateInput" class="translate-textarea" rows="4" placeholder="ጽሑፍ ያስገቡ..."></textarea>
+        <div class="translate-buttons">
+          <button class="translate-btn translate-btn-primary" onclick="translateWithAbyssinica()">🚀 ተርጉም</button>
+          <button class="translate-btn" onclick="clearTranslation()">🗑️ አጽዳ</button>
+        </div>
+        <div id="translateOutput" class="translate-output">ትርጉም እዚህ ይታያል</div>
+        <div class="example-chips">
+          <div class="example-chip" onclick="setExample('እግዚአብሔር ይባርክህ')">እግዚአብሔር ይባርክህ</div>
+          <div class="example-chip" onclick="setExample('ሰላም ለከ ማርያም')">ሰላም ለከ ማርያም</div>
+          <div class="example-chip" onclick="setExample('እግዚአብሔር ታላቅ ነው')">እግዚአብሔር ታላቅ ነው</div>
+          <div class="example-chip" onclick="setExample('ማርያም ቅድስት ድንግል ናት')">ማርያም ቅድስት ድንግል ናት</div>
+        </div>
+        <div class="abyssinica-link">
+          <a href="https://www.abyssinica.ai/translator" target="_blank">🔗 ሙሉ ተርጓሚ ክፈት (Abyssinica AI)</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div id="quiz" class="sec">
+      <div id="qmain"><div class="qtop"><span class="qnum" id="qnum">1/10</span><div class="qpbar"><div class="qpf" id="qprog"></div></div><span class="qsc" id="qscore">✦ 0</span></div><div class="qcard"><div class="qql">ትርጉሙ ምንድን ነው?</div><div class="qw" id="qword"></div><div class="qhint" id="qhint"></div><div class="qabt" onclick="spkQ()">▶ ድምጽ ስማ</div><div class="choices" id="qchoices"></div><div class="qfb" id="qfb"></div><button class="nxt" id="qnext" onclick="nextQ()">ቀጣይ →</button></div></div>
+      <div id="qres" style="display:none"><div class="rbox"><div class="rsc" id="rscore"></div><div class="rst" id="rstars"></div><div class="rmg" id="rmsg"></div><button class="rbtn" onclick="startQuiz()">እንደገና ሞክር</button></div></div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div id="about" class="sec">
+      <div class="slbl">ስለ App-ው</div>
+      <div class="about-card">
+        <div class="about-photo"><img src="https://img.sanishtech.com/u/9d0e391d6122336d556910da923ac707.png" alt="ዲያቆን አቤኔዘር"></div>
+        <div style="font-family:'Cinzel Decorative',serif;font-size:16px;color:#e8b84b;">አበነዘር ዘተዋህዶ</div>
+        <div style="font-size:10px;">ABENEZAR ZETWAHDO</div>
+        <div style="font-size:11px;margin-top:8px;">ይህ አፕ የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተ ክርስቲያን ዲያቆናት እና ምዕምናን ግእዝ ቋንቋን እንዲማሩ ታስቦ ተዘጋጅቷል።</div>
+      </div>
+      <div class="about-info-card">
+        <div class="about-row"><div class="about-icon">👤</div><div><div style="font-size:13px;color:var(--gold-l);">አበነዘር ዘተዋህዶ</div><div style="font-size:10px;">ዲያቆን · Ethiopian Orthodox</div></div></div>
+        <div class="about-row"><div class="about-icon">📺</div><div><a href="https://youtube.com/@abeenezar_mulu?si=z9A2wkYUXkq-a_lK" target="_blank" style="color:var(--gold-l);">YouTube ቻናል</a></div></div>
+        <div class="about-row"><div class="about-icon">📱</div><div><a href="https://t.me/ye_mariam_agelgay" target="_blank" style="color:var(--gold-l);">ቴሌግራም ቻናል</a></div></div>
+      </div>
+      <div class="orn">✦ ስብሐት ለእግዚአብሔር ✦</div>
+    </div>
+  </div>
+</div>
+
+<audio id="aud" preload="none"></audio>
+
+<script>
+// ======================== GLOBAL ========================
+let isDay = false;
+let sOn = true;
+let playing = false;
+let ct = 0;
+let currentTranslateLang = 'am';
+const auth = firebase.auth();
+
+const tracks = [
+  {num:'፩',name:'ውዳሴ ማርያም ቅድስት',day:'ዘሰንበተ ክርስቲያን',sub:'ሰንበተ ክርስቲያን',file:'wudase1.mp3'},
+  {num:'፪',name:'ውዳሴ ማርያም ዜማ',day:'ዘሰኑይ',sub:'ሰኑይ',file:'wudase2.mp3'},
+  {num:'፫',name:'ውዳሴ ማርያም ዜማ',day:'ዘሠሉስ',sub:'ሠሉስ',file:'wudase3.mp3'},
+  {num:'፬',name:'ውዳሴ ማርያም ዜማ',day:'ዘረቡዕ',sub:'ረቡዕ',file:'wudase4.mp3'},
+  {num:'፭',name:'ውዳሴ ማርያም ዜማ',day:'ዘሐሙስ',sub:'ሐሙስ',file:'wudase5.mp3'},
+  {num:'፮',name:'ውዳሴ ማርያም ዜማ',day:'ዘዓርብ',sub:'ዓርብ',file:'wudase6.mp3'},
+  {num:'፯',name:'ውዳሴ ማርያም ዜማ',day:'ዘቀዳሚት ሰንበት',sub:'ቀዳሚት ሰንበት',file:'wudase7.mp3'},
+];
+const aud = document.getElementById('aud');
+
+// ======================== BACKGROUND CANVAS ========================
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+let pts = [];
+function initP(){
+  cv.width = window.innerWidth; cv.height = window.innerHeight;
+  pts = [];
+  for(let i=0;i<35;i++) pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1+0.2,vx:(Math.random()-0.5)*0.1,vy:(Math.random()-0.5)*0.1,a:Math.random()*0.3+0.05});
+}
+function drawP(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0) p.x=cv.width; if(p.x>cv.width) p.x=0;
+    if(p.y<0) p.y=cv.height; if(p.y>cv.height) p.y=0;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(200,144,42,${p.a})`; ctx.fill();
+  });
+  requestAnimationFrame(drawP);
+}
+initP(); drawP(); window.addEventListener('resize',initP);
+
+// ======================== PLAYER ========================
+function buildList(){
+  const L = document.getElementById('wlist'); L.innerHTML = '';
+  tracks.forEach((t,i)=>{
+    const d = document.createElement('div');
+    d.className = 'witem' + (i===0?' on':'');
+    d.id = 'wi'+i; d.onclick = () => loadT(i,true);
+    d.innerHTML = `<div class="winum${i===0?' on':''}" id="wn${i}">${t.num}</div>
+                   <div class="wiinfo"><div class="winame">${t.name}</div><div class="widay">${t.day}</div></div>`;
+    L.appendChild(d);
+  });
+}
+function loadT(i,auto){
+  ct = i; const t = tracks[i];
+  aud.src = t.file; aud.load();
+  document.getElementById('wday').textContent = t.day;
+  document.getElementById('wname').textContent = t.name;
+  document.getElementById('wsub').textContent = t.num+'ኛ · '+t.sub;
+  document.getElementById('wpf').style.width = '0%';
+  document.getElementById('wcur').textContent = '0:00';
+  document.getElementById('wdur').textContent = '--:--';
+  tracks.forEach((_,j)=>{
+    const wi = document.getElementById('wi'+j), wn = document.getElementById('wn'+j);
+    if(wi) wi.classList.toggle('on',j===i);
+    if(wn) wn.classList.toggle('on',j===i);
+  });
+  if(auto){
+    if(aud) aud.play().catch(()=>{});
+    playing = true;
+    updBtn();
+  }
+}
+function togglePlay(){
+  if(playing){
+    aud.pause(); playing=false;
+  } else {
+    aud.play().catch(()=>{});
+    playing=true;
+  }
+  updBtn();
+}
+function updBtn(){
+  const btn = document.getElementById('pbtn'), disc = document.getElementById('wdisc');
+  if(playing){
+    btn.innerHTML = '⏸';
+    if(disc) disc.classList.remove('paused');
+  } else {
+    btn.innerHTML = '▶';
+    if(disc) disc.classList.add('paused');
+  }
+}
+function nextT(){ loadT((ct+1)%tracks.length, playing); }
+function prevT(){ loadT((ct-1+tracks.length)%tracks.length, playing); }
+function fwd(){ aud.currentTime = Math.min(aud.currentTime+10, aud.duration||0); }
+function rwnd(){ aud.currentTime = Math.max(aud.currentTime-10,0); }
+function fmt(s){ if(isNaN(s)) return '--:--'; return Math.floor(s/60)+':'+(Math.floor(s%60)<10?'0':'')+Math.floor(s%60); }
+aud.addEventListener('timeupdate',()=>{
+  if(!aud.duration) return;
+  document.getElementById('wpf').style.width = ((aud.currentTime/aud.duration)*100)+'%';
+  document.getElementById('wcur').textContent = fmt(aud.currentTime);
+});
+aud.addEventListener('loadedmetadata',()=>document.getElementById('wdur').textContent = fmt(aud.duration));
+aud.addEventListener('ended',()=>nextT());
+function seekA(e){
+  if(!aud.duration) return;
+  const r = document.getElementById('wpbg').getBoundingClientRect();
+  aud.currentTime = ((e.clientX - r.left)/r.width)*aud.duration;
+}
+buildList(); loadT(0,false);
+
+// ======================== VOICE ========================
+let amVoice = null;
+function loadVoices() {
+  const voices = speechSynthesis.getVoices();
+  amVoice = voices.find(v => v.lang === 'am-ET' || v.lang === 'am');
+}
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+function speakWord(word) {
+  if (!sOn) return;
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'am-ET';
+  utterance.rate = 0.7;
+  if (amVoice) utterance.voice = amVoice;
+  speechSynthesis.speak(utterance);
+}
+function spk(t, card) {
+  if(!sOn) return;
+  if(card){ const ab = card.querySelector('.ab,.pcab'); if(ab){ const ot = ab.textContent; ab.textContent='♪'; setTimeout(()=>ab.textContent=ot, 800); } }
+  if(aud && !aud.paused) aud.pause();
+  if(!'speechSynthesis' in window) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = 'am-ET';
+  u.rate = 0.7;
+  if(amVoice) u.voice = amVoice;
+  speechSynthesis.speak(u);
+}
+function spkQ(){ if(curQ) spk(curQ.g, null); }
+
+// ======================== DAY/NIGHT ========================
+function toggleDay(){
+  isDay = !isDay;
+  document.body.classList.toggle('day', isDay);
+}
+function toggleSound(){
+  sOn = !sOn;
+  document.getElementById('sndBtn').classList.toggle('off', !sOn);
+}
+
+// ======================== ETHIOPIAN DATE ========================
+function getEthiopianDate(){
+  const today = new Date();
+  let year = today.getFullYear();
+  let ethYear = year - 8;
+  let ethMonth, ethDay;
+  const startOfYear = new Date(year, 8, 11);
+  if(today < startOfYear){
+    ethYear--;
+    const prevStart = new Date(year-1, 8, 11);
+    const daysDiff = Math.floor((today - prevStart) / (1000*3600*24));
+    ethMonth = Math.floor(daysDiff / 30);
+    ethDay = (daysDiff % 30) + 1;
+  } else {
+    const daysDiff = Math.floor((today - startOfYear) / (1000*3600*24));
+    ethMonth = Math.floor(daysDiff / 30);
+    ethDay = (daysDiff % 30) + 1;
+  }
+  const months = ["መስከረም","ጥቅምት","ኅዳር","ታኅሣሥ","ጥር","የካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰኔ","ሐምሌ","ነሐሴ","ጳጉሜ"];
+  return { day: ethDay, month: months[ethMonth], year: ethYear };
+}
+function updateEthiopianDate(){
+  const eth = getEthiopianDate();
+  const el = document.getElementById('ethDate');
+  if(el) el.textContent = `${eth.day} ${eth.month} ${eth.year}`;
+}
+setInterval(updateEthiopianDate, 3600000);
+updateEthiopianDate();
+
+// ======================== QUIZ ========================
+const allQ = [
+  {g:'እግዚአብሔር',l:'ʾEgziʾabḥēr',m:'ጌታ፣ አምላክ'},
+  {g:'ማርያም',l:'Māryām',m:'ቅድስት ድንግል'},
+  {g:'ወንጌል',l:'Wengel',m:'ምሥራች'},
+  {g:'ሰላም',l:'Sälam',m:'ሰላምታ'}
+];
+let qL=[], qi=0, qsc=0, qAns=false, curQ=null;
+function shuf(a){ return [...a].sort(()=>Math.random()-0.5); }
+function startQuiz(){
+  qL = shuf(allQ).slice(0,4);
+  qi=0; qsc=0; qAns=false;
+  document.getElementById('qmain').style.display='block';
+  document.getElementById('qres').style.display='none';
+  loadQ();
+}
+function loadQ(){
+  if(qi>=qL.length){ showResult(); return; }
+  const w = qL[qi]; curQ = w; qAns = false;
+  document.getElementById('qnum').textContent = (qi+1)+'/'+qL.length;
+  document.getElementById('qprog').style.width = Math.round((qi/qL.length)*100)+'%';
+  document.getElementById('qscore').textContent = '✦ '+qsc;
+  document.getElementById('qword').textContent = w.g;
+  document.getElementById('qhint').textContent = w.l;
+  document.getElementById('qfb').textContent = '';
+  document.getElementById('qnext').style.display = 'none';
+  const wrong = shuf(allQ.filter(x=>x.m!==w.m)).slice(0,3).map(x=>x.m);
+  const ch = shuf([w.m, ...wrong]);
+  const el = document.getElementById('qchoices'); el.innerHTML = '';
+  ch.forEach(c=>{ const b=document.createElement('button'); b.className='ch'; b.textContent=c; b.onclick=()=>chkA(c,w.m); el.appendChild(b); });
+}
+function chkA(sel,cor){
+  if(qAns) return; qAns=true;
+  document.querySelectorAll('.ch').forEach(b=>{ if(b.textContent===cor)b.classList.add('ok'); else if(b.textContent===sel)b.classList.add('no'); b.style.pointerEvents='none'; });
+  const fb = document.getElementById('qfb');
+  if(sel===cor){ qsc++; fb.textContent='✓ ትክክል ነው!'; }
+  else{ fb.textContent='✗ መልሱ: '+cor; }
+  document.getElementById('qscore').textContent = '✦ '+qsc;
+  document.getElementById('qnext').style.display = 'block';
+  qi++;
+}
+function nextQ(){ loadQ(); }
+function showResult(){
+  document.getElementById('qmain').style.display='none';
+  document.getElementById('qres').style.display='block';
+  const pct = Math.round((qsc/qL.length)*100);
+  document.getElementById('sc').textContent = pct+'%';
+  let st='', mg='';
+  if(pct>=80){st='★★★'; mg='እጅግ በጣም ጥሩ!';}
+  else if(pct>=60){st='★★☆'; mg='ጥሩ ነው! ቀጥል!';}
+  else{st='☆☆☆'; mg='አታስፈራ! ሁሉም ከጅምሩ ይጀምራል።';}
+  document.getElementById('rscore').textContent = qsc+'/'+qL.length+' ('+pct+'%)';
+  document.getElementById('rstars').textContent = st;
+  document.getElementById('rmsg').textContent = mg;
+}
+
+// ======================== TABS ========================
+function showTab(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  if(id==='quiz') startQuiz();
+}
+
+// ======================== SEARCH ========================
+const searchableItems = [];
+function buildSearchIndex() {
+  document.querySelectorAll('.wcard, .pcard, .gc').forEach(item => {
+    const word = item.getAttribute('data-word') || item.querySelector('.wcg, .pcg, .gct')?.innerText || '';
+    const meaning = item.getAttribute('data-meaning') || item.querySelector('.wcam, .pcam, .gcb')?.innerText || '';
+    if(word && meaning) searchableItems.push({ word, meaning });
+  });
+}
+function handleSearch(e) {
+  const query = e.target.value.toLowerCase().trim();
+  const resultsDiv = document.getElementById('searchResults');
+  if(query === '') { resultsDiv.classList.remove('show'); resultsDiv.innerHTML = ''; return; }
+  const items = searchableItems.filter(item => item.word.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query)).slice(0, 20);
+  if(items.length > 0) {
+    resultsDiv.innerHTML = items.map(item => `<div class="search-item" onclick="spk('${item.word}', null); document.getElementById('searchInput').value=''; resultsDiv.classList.remove('show');"><div class="search-word">${item.word}</div><div class="search-meaning">${item.meaning}</div></div>`).join('');
+    resultsDiv.classList.add('show');
+  } else { resultsDiv.innerHTML = '<div class="search-item">ምንም አልተገኘም</div>'; resultsDiv.classList.add('show'); }
+}
+function clearSearch() { document.getElementById('searchInput').value = ''; document.getElementById('searchResults').classList.remove('show'); }
+
+// ======================== VIDEO ========================
+const videos = [{title:"ግእዝ ፊደላት ትምህርት", desc:"የግእዝ ፊደላት ከሀ እስከ ፐ", videoId:"dQw4w9WgXcQ"}];
+function buildVideos(){
+  const grid = document.getElementById('videoGrid');
+  if(!grid) return;
+  grid.innerHTML = videos.map(v => `<div class="video-card" onclick="openVideo('${v.videoId}')"><div class="video-thumb"><div class="play-icon">▶</div></div><div class="video-info"><div class="video-title">${v.title}</div><div class="video-desc">${v.desc}</div></div></div>`).join('');
+}
+function openVideo(videoId){
+  const modal = document.createElement('div');
+  modal.className = 'video-modal show';
+  modal.innerHTML = `<div class="close-vid" onclick="this.parentElement.remove()">✖</div><iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  document.body.appendChild(modal);
+}
+buildVideos();
+
+// ======================== TRANSLATOR ========================
+const geEzDict = {
+  "እግዚአብሔር": "እግዚአብሔር",
+  "ይባርክህ": "ይባርከካ",
+  "ሰላም": "ሰላም",
+  "ማርያም": "ማርያም",
+  "ቅድስት": "ቅድስት",
+  "ድንግል": "ድንግል",
+  "ታላቅ": "ዓቢይ",
+  "ነው": "ውእቱ",
+  "ናት": "ይእቲ",
+  "ጌታ": "ጌታ"
+};
+const phrases = [
+  { am: "እግዚአብሔር ይባርክህ", gez: "እግዚአብሔር ይባርከካ" },
+  { am: "ሰላም ለከ ማርያም", gez: "ሰላም ለከ ማርያም" }
+];
+function setSourceLang(lang) { currentTranslateLang = 'am'; document.getElementById('sourceAm').classList.add('active'); document.getElementById('targetGez').classList.remove('active'); }
+function setTargetLang(lang) { currentTranslateLang = 'gez'; document.getElementById('targetGez').classList.add('active'); document.getElementById('sourceAm').classList.remove('active'); }
+function translateWithAbyssinica() {
+  const input = document.getElementById('translateInput').value.trim();
+  const output = document.getElementById('translateOutput');
+  if(!input) { output.innerHTML = 'እባክዎ ጽሑፍ ያስገቡ'; return; }
+  let result = input;
+  for(let p of phrases) { if(input === p.am) { result = p.gez; output.innerHTML = result; return; } }
+  for(let [am, gez] of Object.entries(geEzDict)) { result = result.replace(new RegExp(am, 'g'), gez); }
+  if(result.includes("ነው") && !result.includes("ውእቱ")) result = result.replace("ነው", "ውእቱ");
+  output.innerHTML = result || 'ትርጉም አልተገኘም';
+}
+function clearTranslation() { document.getElementById('translateInput').value = ''; document.getElementById('translateOutput').innerHTML = 'ትርጉም እዚህ ይታያል'; }
+function setExample(text) { document.getElementById('translateInput').value = text; translateWithAbyssinica(); }
+
+// ======================== AUTH ========================
+function showRegister() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('register-screen').style.display = 'flex'; }
+function showLogin() { document.getElementById('register-screen').style.display = 'none'; document.getElementById('login-screen').style.display = 'flex'; }
+function login() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-password').value;
+  const errorDiv = document.getElementById('login-error');
+  if(!email || !pass) { errorDiv.textContent = 'Email እና password ያስፈልጋል!'; return; }
+  auth.signInWithEmailAndPassword(email, pass).catch(e => errorDiv.textContent = e.message);
+}
+function register() {
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-password').value;
+  const name = document.getElementById('reg-name').value.trim();
+  const errorDiv = document.getElementById('reg-error');
+  if(!email || !pass) { errorDiv.textContent = 'Email እና password ያስፈልጋል!'; return; }
+  auth.createUserWithEmailAndPassword(email, pass).then((userCred) => { if(name) userCred.user.updateProfile({ displayName: name }); }).catch(e => errorDiv.textContent = e.message);
+}
+function logout() { auth.signOut(); }
+auth.onAuthStateChanged(user => {
+  const loginScreen = document.getElementById('login-screen');
+  const registerScreen = document.getElementById('register-screen');
+  const mainApp = document.getElementById('main-app');
+  if(user) {
+    loginScreen.style.display = 'none';
+    registerScreen.style.display = 'none';
+    mainApp.style.display = 'block';
+    let s = parseInt(localStorage.getItem('str')||'0')+1;
+    localStorage.setItem('str',s);
+    document.getElementById('ss').textContent = s;
+    if(sOn) speakWord('እንኳን ደህና መጣህ');
+  } else {
+    loginScreen.style.display = 'flex';
+    registerScreen.style.display = 'none';
+    mainApp.style.display = 'none';
+  }
+});
+
+// Initialize
+setTimeout(() => { buildSearchIndex(); }, 500);
+setTimeout(() => {
+  const sp = document.getElementById('sp');
+  if(sp){ sp.classList.add('out'); setTimeout(()=>sp.remove(),800); }
+}, 2000);
+document.querySelectorAll('.wcard, .pcard').forEach(card => {
+  const word = card.getAttribute('data-word');
+  if(word){
+    card.addEventListener('click', (e) => { if(e.target.closest('.ab,.pcab')) return; spk(word, card); });
+    const btn = card.querySelector('.ab, .pcab');
+    if(btn){ btn.addEventListener('click', (e) => { e.stopPropagation(); spk(word, card); }); }
+  }
+});
+</script>
+</body>
+</html>
