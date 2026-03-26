@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0400">
+<title>ግእዝ ቋንቋ | መግቢያ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --gold: #c8902a;
+  --gold-light: #e8b84b;
+  --gold-dark: #9b6a1c;
+  --bg: #0a0400;
+  --bg-light: #1a0c00;
+  --bg-card: #251200;
+  --text: #f0e0c0;
+  --text-dark: #c0b0a0;
+  --border: rgba(200,144,66,0.3);
+}
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif Ethiopic', serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* Login Screen */
+#login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.login-card {
+  background: linear-gradient(145deg, #fdf8ed, #f5e6d3);
+  border-radius: 32px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+  border: 1px solid rgba(200,144,66,0.5);
+  width: 100%;
+  max-width: 380px;
+}
+.cross {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  background: radial-gradient(circle, rgba(200,144,66,0.2), transparent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s ease infinite;
+}
+.cross svg { width: 45px; height: 45px; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+.login-card h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 28px;
+  color: #b87c2e;
+  margin-bottom: 5px;
+}
+.login-card .sub {
+  font-size: 10px;
+  color: #9b6a1c;
+  margin-bottom: 20px;
+}
+.shining-gold {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  background: linear-gradient(135deg, #c8902a, #f5b81b, #c8902a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 2s ease-in-out infinite;
+}
+@keyframes shine {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+.login-input {
+  width: 100%;
+  padding: 14px;
+  background: rgba(200,144,66,0.1);
+  border: 1px solid rgba(200,144,66,0.3);
+  border-radius: 14px;
+  color: #2c241a;
+  font-size: 14px;
+  margin-bottom: 14px;
+  outline: none;
+}
+.login-input:focus { border-color: #c8902a; }
+.pwd-wrapper { position: relative; }
+.toggle-pwd {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #c8902a;
+  font-size: 18px;
+  cursor: pointer;
+}
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #c8902a, #e8b84b);
+  border: none;
+  border-radius: 14px;
+  color: #0a0400;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.login-error {
+  font-size: 12px;
+  color: #c0392b;
+  margin-top: 12px;
+}
+.login-message {
+  margin-top: 15px;
+  font-size: 11px;
+  color: #9b6a1c;
+}
+.login-message strong {
+  color: #c8902a;
+  cursor: pointer;
+}
+/* Main App */
+#main-app {
+  display: none;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.app-header {
+  background: linear-gradient(180deg, #1c0c00, var(--bg));
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.app-header h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 18px;
+  color: var(--gold-light);
+}
+.header-btns {
+  display: flex;
+  gap: 10px;
+}
+.icon-btn {
+  background: rgba(200,144,66,0.15);
+  border: 1px solid rgba(200,144,66,0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+.logout-btn { background: rgba(200,144,66,0.2); }
+/* Navigation */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+}
+.nav-btn {
+  padding: 8px 16px;
+  background: rgba(200,144,66,0.1);
+  border: none;
+  border-radius: 30px;
+  color: var(--gold-light);
+  cursor: pointer;
+  font-size: 13px;
+}
+.nav-btn.active {
+  background: rgba(200,144,66,0.3);
+}
+/* Sections */
+.section { display: none; margin-top: 15px; }
+.section.active { display: block; }
+.section-title {
+  font-size: 11px;
+  color: rgba(200,144,66,0.5);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.word-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.word-card:active { transform: scale(0.98); }
+.word { font-size: 18px; font-weight: 600; color: var(--gold-light); }
+.meaning { font-size: 13px; color: var(--text-dark); margin-top: 5px; }
+.welcome-card {
+  text-align: center;
+  padding: 30px;
+  background: var(--bg-card);
+  border-radius: 20px;
+}
+.welcome-card h3 { color: var(--gold-light); margin-bottom: 10px; }
+.orn {
+  text-align: center;
+  color: var(--gold);
+  font-size: 11px;
+  opacity: 0.4;
+  margin-top: 20px;
+}
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAanb1xTypN7kPgz5D981q9sSnue6SrpQI",
+    authDomain: "geez-language-app.firebaseapp.com",
+    projectId: "geez-language-app",
+    storageBucket: "geez-language-app.firebasestorage.app",
+    messagingSenderId: "131010600566",
+    appId: "1:131010600566:web:1ccf5ff68051a3051a8957"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="cross">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#e8b84b" stroke-width="2.5">
+        <line x1="50" y1="20" x2="50" y2="80"/>
+        <line x1="20" y1="50" x2="80" y2="50"/>
+        <circle cx="50" cy="50" r="18" fill="none"/>
+        <circle cx="50" cy="50" r="8" fill="none"/>
+      </svg>
+    </div>
+    <h1>ግእዝ ቋንቋ</h1>
+    <div class="sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+    <div class="shining-gold">🇪🇹 ሰላም ለኢትዮጵያ 🕊️</div>
+    <input type="email" id="login-email" class="login-input" placeholder="Email አድራሻ">
+    <div class="pwd-wrapper">
+      <input type="password" id="login-password" class="login-input" placeholder="የሚስጥር ቁጥር">
+      <button class="toggle-pwd" onclick="togglePassword()">👁️</button>
+    </div>
+    <button class="login-btn" onclick="login()">ግባ</button>
+    <div class="login-error" id="login-error"></div>
+    <div class="login-message">አዲስ ተጠቃሚ ከሆንክ <strong onclick="showRegister()">እዚህ ተመዝገብ</strong></div>
+  </div>
+</div>
+
+<!-- REGISTER SCREEN -->
+<div id="register-screen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:1500; align-items:center; justify-content:center; padding:20px;">
+  <div class="login-card">
+    <h1>ግእዝ ቋንቋ</h1>
+    <div class="sub">ETHIOPIAN ORTHODOX · GE'EZ</div>
+    <div class="shining-gold">🇪🇹 ሰላም ለኢትዮጵያ 🕊️</div>
+    <input type="email" id="reg-email" class="login-input" placeholder="Email አድራሻ">
+    <input type="text" id="reg-name" class="login-input" placeholder="ስምህ">
+    <div class="pwd-wrapper">
+      <input type="password" id="reg-password" class="login-input" placeholder="የሚስጥር ቁጥር">
+      <button class="toggle-pwd" onclick="toggleRegPassword()">👁️</button>
+    </div>
+    <button class="login-btn" onclick="register()">ተመዝገብ</button>
+    <div class="login-error" id="reg-error"></div>
+    <div class="login-message">ቀድሞ አካውንት ካለህ <strong onclick="showLogin()">እዚህ ግባ</strong></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="main-app">
+  <div class="app-header">
+    <h2>ግእዝ ቋንቋ</h2>
+    <div class="header-btns">
+      <div class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</div>
+      <div class="icon-btn logout-btn" onclick="logout()">🚪</div>
+    </div>
+  </div>
+  
+  <div class="nav">
+    <button class="nav-btn active" onclick="showSection('home',this)">መነሻ</button>
+    <button class="nav-btn" onclick="showSection('words',this)">ቃላት</button>
+    <button class="nav-btn" onclick="showSection('about',this)">ስለኛ</button>
+  </div>
+  
+  <div id="home" class="section active">
+    <div class="welcome-card">
+      <h3 id="welcomeMsg">እንኳን ደህና መጣህ! 🎉</h3>
+      <p>እግዚአብሔር ይባርክህ!</p>
+      <div class="orn">✦ ግእዝ ቋንቋ ይማሩ ✦</div>
+    </div>
+  </div>
+  
+  <div id="words" class="section">
+    <div class="section-title">ቃላት</div>
+    <div class="word-card" onclick="speakWord('እግዚአብሔር')">
+      <div class="word">እግዚአብሔር</div>
+      <div class="meaning">ጌታ፣ አምላክ</div>
+    </div>
+    <div class="word-card" onclick="speakWord('ማርያም')">
+      <div class="word">ማርያም</div>
+      <div class="meaning">ቅድስት ድንግል</div>
+    </div>
+    <div class="word-card" onclick="speakWord('ወንጌል')">
+      <div class="word">ወንጌል</div>
+      <div class="meaning">ምሥራች</div>
+    </div>
+    <div class="word-card" onclick="speakWord('ሰላም')">
+      <div class="word">ሰላም</div>
+      <div class="meaning">ሰላምታ</div>
+    </div>
+  </div>
+  
+  <div id="about" class="section">
+    <div class="welcome-card">
+      <h3>ስለ አፕሉ</h3>
+      <p>ይህ አፕ የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተ ክርስቲያን ዲያቆናት እና ምዕምናን ግእዝ ቋንቋን እንዲማሩ ታስቦ ተዘጋጅቷል።</p>
+      <div class="orn">✦ እግዚአብሔር ይባርክህ ✦</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== GLOBALS ==========
+let isDark = true;
+let amVoice = null;
+const auth = firebase.auth();
+
+// ========== VOICE ==========
+function loadVoices() {
+  const voices = speechSynthesis.getVoices();
+  amVoice = voices.find(v => v.lang === 'am-ET' || v.lang === 'am');
+}
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+function speakWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'am-ET';
+  utterance.rate = 0.7;
+  if (amVoice) utterance.voice = amVoice;
+  speechSynthesis.speak(utterance);
+}
+
+// ========== THEME ==========
+function toggleTheme() {
+  isDark = !isDark;
+  const bg = isDark ? '#0a0400' : '#f5f0e8';
+  const text = isDark ? '#f0e0c0' : '#2c241a';
+  document.body.style.background = bg;
+  document.body.style.color = text;
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = isDark ? '🌙' : '☀️';
+}
+
+// ========== AUTH ==========
+function showRegister() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('register-screen').style.display = 'flex';
+}
+function showLogin() {
+  document.getElementById('register-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+function togglePassword() {
+  const pwd = document.getElementById('login-password');
+  const btn = document.querySelector('#login-screen .toggle-pwd');
+  if (pwd.type === 'password') { pwd.type = 'text'; btn.textContent = '🙈'; }
+  else { pwd.type = 'password'; btn.textContent = '👁️'; }
+}
+function toggleRegPassword() {
+  const pwd = document.getElementById('reg-password');
+  const btn = document.querySelector('#register-screen .toggle-pwd');
+  if (pwd.type === 'password') { pwd.type = 'text'; btn.textContent = '🙈'; }
+  else { pwd.type = 'password'; btn.textContent = '👁️'; }
+}
+function login() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-password').value;
+  const errorDiv = document.getElementById('login-error');
+  if (!email || !pass) { errorDiv.textContent = 'Email እና password ያስፈልጋል!'; return; }
+  auth.signInWithEmailAndPassword(email, pass).catch(e => errorDiv.textContent = e.message);
+}
+function register() {
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-password').value;
+  const name = document.getElementById('reg-name').value.trim();
+  const errorDiv = document.getElementById('reg-error');
+  if (!email || !pass) { errorDiv.textContent = 'Email እና password ያስፈልጋል!'; return; }
+  auth.createUserWithEmailAndPassword(email, pass).then((userCred) => { if (name) userCred.user.updateProfile({ displayName: name }); }).catch(e => errorDiv.textContent = e.message);
+}
+function logout() { auth.signOut(); }
+
+// ========== AUTH STATE ==========
+auth.onAuthStateChanged(user => {
+  const loginScreen = document.getElementById('login-screen');
+  const registerScreen = document.getElementById('register-screen');
+  const mainApp = document.getElementById('main-app');
+  if (user) {
+    loginScreen.style.display = 'none';
+    registerScreen.style.display = 'none';
+    mainApp.style.display = 'block';
+    document.getElementById('welcomeMsg').innerHTML = `እንኳን ደህና መጣህ፣ ${user.email?.split('@')[0] || 'ተጠቃሚ'}! 🎉`;
+    if (window.speechSynthesis) speakWord('እንኳን ደህና መጣህ');
+  } else {
+    loginScreen.style.display = 'flex';
+    registerScreen.style.display = 'none';
+    mainApp.style.display = 'none';
+  }
+});
+
+// ========== SECTION ==========
+function showSection(sectionId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// Clear form on load
+document.getElementById('login-email').value = '';
+document.getElementById('login-password').value = '';
+document.getElementById('reg-email').value = '';
+document.getElementById('reg-password').value = '';
+document.getElementById('reg-name').value = '';
+</script>
+</body>
+</html>
